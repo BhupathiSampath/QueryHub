@@ -21,7 +21,7 @@ from rest_framework import generics, exceptions, serializers, status
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-class GetDataSerializer(serializers.ModelSerializer, LargeResultsSetPagination):
+class GetDataSerializer(serializers.ModelSerializer):
     date = serializers.DateField(required=False)
     lineage = serializers.CharField(required=False)
     division = serializers.CharField(required=False)
@@ -91,7 +91,6 @@ class GetDataSerializer(serializers.ModelSerializer, LargeResultsSetPagination):
 
 class GetDataView(generics.GenericAPIView):
     serializer_class = GetDataSerializer
-    pagination_class = LargeResultsSetPagination
     queryset = QueryHubModel.objects.all()
 
     def post(self, request, *args, **kwargs):
