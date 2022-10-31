@@ -1,0 +1,10 @@
+name: nibmg_tool
+channels:
+  - bioconda
+  - anaconda
+  - defaults
+  - conda-forge
+dependencies:
+  - pip>=22.1.2
+  - python>=3.10
+  - nodejs>=16,<18
