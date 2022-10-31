@@ -17,8 +17,8 @@ export default {
 	axios: {},
 	plugins: [],
 	components: true,
-	modules: ['@nuxtjs/axios'],
-	buildModules: ['@nuxtjs/tailwindcss'],
+	buildModules: [],
+	modules: ['@nuxtjs/axios', ['nuxt-buefy', { materialDesignIcons: false }]],
 	build: {
 		babel: {
 			plugins: [
