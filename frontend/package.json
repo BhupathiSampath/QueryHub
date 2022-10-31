@@ -18,6 +18,7 @@
 		"core-js": "3.15.1",
 		"filepond": "4.30.4",
 		"nuxt": "2.15.7",
+		"nuxt-buefy": "0.4.24",
 		"v-clipboard": "2.2.3",
 		"vue-filepond": "7.0.3",
 		"vue-native-websocket": "2.0.15",
@@ -26,9 +27,7 @@
 	"devDependencies": {
 		"@nuxtjs/composition-api": "^0.33.1",
 		"@nuxtjs/google-fonts": "^3.0.0-0",
-		"@nuxtjs/tailwindcss": "^4.2.0",
 		"eslint-config-prettier": "^8.3.0",
-		"postcss": "^8.3.5",
 		"prettier": "^2.3.2"
 	}
 }
