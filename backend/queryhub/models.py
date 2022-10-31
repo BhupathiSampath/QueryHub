@@ -50,11 +50,6 @@ class QueryHubModel(models.Model):
     aasubstitutions = models.CharField(
         max_length=300, default=None, blank=True, null=True
     )
-    # aasubstitutions = ListCharField(
-    #     base_field=CharField(max_length=10),
-    #     size=6,
-    #     max_length=(6 * 11),
-    # )
     nextclade_pango = models.CharField(
         max_length=300, default=None, blank=True, null=True
     )
