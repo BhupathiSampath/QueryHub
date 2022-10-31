@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models import CharField, Model
-from django_mysql.models import ListCharField
 
 # Create your models here.
 
@@ -9,7 +8,6 @@ class QueryHubModel(models.Model):
     index = models.BigIntegerField(primary_key=True)
     date = models.DateField(default=None, blank=True, null=True)
     date_submitted = models.DateField(default=None, blank=True, null=True)
-    # tag = models.CharField(max_length=300, default=None, blank=True, null=True)
     age = models.CharField(max_length=300, default=None, blank=True, null=True)
     sex = models.CharField(max_length=300, default=None, blank=True, null=True)
     host = models.CharField(max_length=300, default=None, blank=True, null=True)
