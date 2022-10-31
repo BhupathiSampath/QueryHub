@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "backend"
+version = "0.1.0"
+description = ""
+authors = ["Animesh Kumar Singh <animesh.workplace@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+O365 = "^2.0.19"
+mpire = "^2.6.0"
+Django = "^4.0.6"
+Pillow = "^9.2.0"
+Markdown = "^3.4.1"
+Cython = "^0.29.32"
+gunicorn = "^20.1.0"
+django-filter = "^22.1"
+django-ipware = "^4.0.2"
+python-dotenv = "^0.20.0"
+more-itertools = "^8.14.0"
+poetry-bumpversion = "^0.2.0"
+djangorestframework = "^3.13.1"
+django-cors-headers = "^3.13.0"
+django-multiselectfield = "^0.1.12"
+djangorestframework-simplejwt = "^5.2.0"
+uvicorn = {version = "^0.18.2", extras = ["standard"]}
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
