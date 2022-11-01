@@ -44,7 +44,6 @@ class GetDataSerializer(serializers.ModelSerializer):
 
         if days and present == False:
             last_date = QueryHubModel.objects.values("date").latest("date")
-            print(last_date)
             day = last_date["date"] - timedelta(days=int(days))
             obj = obj.filter(date__gte=day)
         if days and present == True:
