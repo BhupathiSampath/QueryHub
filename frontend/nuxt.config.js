@@ -28,4 +28,13 @@ export default {
 			],
 		},
 	},
+	googleFonts: {
+		preload: true,
+		prefetch: true,
+		download: true,
+		display: 'swap',
+		preconnect: true,
+		overwriting: false,
+		families: { 'Lexend Deca': ['100', '200', '300', '400', '500', '600', '700', '800', '900'] },
+	},
 }
