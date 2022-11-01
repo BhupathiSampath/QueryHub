@@ -13,12 +13,12 @@ export default {
 		],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
 	},
-	css: [],
+	css: ['static/css/styles.css'],
 	axios: {},
 	plugins: [],
 	components: true,
-	buildModules: [],
-	modules: ['@nuxtjs/axios', ['nuxt-buefy', { materialDesignIcons: false }]],
+	buildModules: ['@nuxtjs/google-fonts'],
+	modules: ['@nuxtjs/axios', 'nuxt-buefy'],
 	build: {
 		babel: {
 			plugins: [
