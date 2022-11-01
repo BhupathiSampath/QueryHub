@@ -34,11 +34,16 @@ class LineageClassSerializer(serializers.ModelSerializer):
         division = value.get("division")
         nextclade_pango = value.get("nextclade_pango")
         aasubstitutions = value.get("aasubstitutions")
-        days = int(self.context.get("request").data.get("days"))
-        if not days:
-            raise exceptions.ValidationError("Days is rquired field")
-        day = datetime.date.today() - timedelta(days=days)
+        days = self.context.get("request").data.get("days")
+        present = self.context.get("request").data.get("present")
         obj = QueryHubModel.objects
+        if days and present == False:
+            last_date = QueryHubModel.objects.values("date").latest("date")
+            day = last_date["date"] - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
+        if days and present == True:
+            day = datetime.date.today() - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
         if date:
             obj = obj.filter(date=date)
         if lineage:
@@ -58,8 +63,7 @@ class LineageClassSerializer(serializers.ModelSerializer):
                 )
             )
         obj = (
-            obj.filter(date__gte=day)
-            .values("who_label")
+            obj.values("who_label")
             .annotate(Count("strain", distinct=True))
             .order_by("-strain__count")
         )

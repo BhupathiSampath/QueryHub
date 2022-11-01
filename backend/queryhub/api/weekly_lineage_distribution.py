@@ -35,10 +35,15 @@ class WeeklyLineageSerializer(serializers.ModelSerializer):
         nextclade_pango = value.get("nextclade_pango")
         aasubstitutions = value.get("aasubstitutions")
         days = self.context.get("request").data.get("days")
-        if not days:
-            raise exceptions.ValidationError("Days is rquired field")
-        day = datetime.date.today() - timedelta(days=int(days))
+        present = self.context.get("request").data.get("present")
         obj = QueryHubModel.objects
+        if days and present == False:
+            last_date = QueryHubModel.objects.values("date").latest("date")
+            day = last_date["date"] - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
+        if days and present == True:
+            day = datetime.date.today() - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
         if date:
             obj = obj.filter(date=date)
         if lineage:
@@ -73,8 +78,7 @@ class WeeklyLineageSerializer(serializers.ModelSerializer):
                 )
             )
         obj = (
-            obj.filter(date__gte=day)
-            .values("collection_week", "lineage")
+            obj.values("collection_week", "lineage")
             .annotate(Count("strain", distinct=True))
             .order_by("date__year", "date__week")
         )

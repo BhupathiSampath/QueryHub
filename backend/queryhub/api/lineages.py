@@ -1,6 +1,8 @@
+import datetime
 from django.db.models import Count
 from ..models import QueryHubModel
 from collections import OrderedDict
+from datetime import date, timedelta
 from .utils import create_uniform_response
 from rest_framework.response import Response
 from rest_framework import generics, exceptions, serializers, status
@@ -30,7 +32,16 @@ class LineageCountSerializer(serializers.ModelSerializer):
         division = value.get("division")
         nextclade_pango = value.get("nextclade_pango")
         aasubstitutions = value.get("aasubstitutions")
+        days = self.context.get("request").data.get("days")
+        present = self.context.get("request").data.get("present")
         obj = QueryHubModel.objects
+        if days and present == False:
+            last_date = QueryHubModel.objects.values("date").latest("date")
+            day = last_date["date"] - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
+        if days and present == True:
+            day = datetime.date.today() - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
         if date:
             obj = obj.filter(date=date)
         if lineage:
