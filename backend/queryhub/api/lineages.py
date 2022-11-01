@@ -1,4 +1,7 @@
+import operator
 import datetime
+from functools import reduce
+from django.db.models import Q
 from django.db.models import Count
 from ..models import QueryHubModel
 from collections import OrderedDict

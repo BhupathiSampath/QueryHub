@@ -1,4 +1,7 @@
+import operator
 import datetime
+from functools import reduce
+from django.db.models import Q
 from ..models import QueryHubModel
 from datetime import date, timedelta
 from .utils import create_uniform_response
