@@ -44,6 +44,7 @@ class MonthlyLineageSerializer(serializers.ModelSerializer):
         lineage = value.get("lineage")
         division = value.get("division")
         nextclade_pango = value.get("nextclade_pango")
+        aasubstitutions = value.get("aasubstitutions")
         days = self.context.get("request").data.get("days")
         if not days:
             raise exceptions.ValidationError("Days is rquired field")
