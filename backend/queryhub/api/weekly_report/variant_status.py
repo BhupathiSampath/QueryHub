@@ -24,17 +24,17 @@ class VariantStatusSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, value):
-        QuerySet1 = (
-            QueryHubModel.objects.filter(
-                date__gte="2021-01-01",
-            )
-            .values_list("collection_month")
-            .order_by("date__year", "date__month")
-            .distinct()
-        )
-        months = []
-        for i in QuerySet1:
-            months.extend(i)
+        # QuerySet1 = (
+        #     QueryHubModel.objects.filter(
+        #         date__gte="2021-01-01",
+        #     )
+        #     .values_list("collection_month")
+        #     .order_by("date__year", "date__month")
+        #     .distinct()
+        # )
+        # months = []
+        # for i in QuerySet1:
+        #     months.extend(i)
         QuerySet = (
             QueryHubModel.objects.filter(
                 date__gte="2021-01-01",
