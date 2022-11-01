@@ -1,20 +1,7 @@
-import datetime
 from itertools import groupby
-from django_filters import utils
-from django.utils import timezone
 from django.db.models import Count
-from collections import OrderedDict
-from dateutil.relativedelta import *
-from datetime import date, timedelta
 from queryhub.models import QueryHubModel
-from django.db.models.query import QuerySet
 from rest_framework.response import Response
-from django_filters.constants import EMPTY_VALUES
-from django_filters import rest_framework as filters
-from rest_framework.pagination import PageNumberPagination
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.generics import ListAPIView, RetrieveAPIView
 from ..utils import create_uniform_response, weekly_report_stacked
 from rest_framework import generics, exceptions, serializers, status
 
