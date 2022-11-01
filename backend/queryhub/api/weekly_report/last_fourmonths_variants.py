@@ -42,13 +42,12 @@ class LastFourMonthsVariantSerializer(serializers.ModelSerializer):
             .order_by("date__year", "date__month", "-who_label")
         )
         d = weekly_report_stacked(QuerySet)
-        QuerySet1 = QueryHubModel.objects.values("who_label").distinct()
-        labels = []
-        for i in QuerySet1:
-            labels.append(i["who_label"])
+        labels = QueryHubModel.objects.values_list("who_label", flat=True).distinct()
+        # labels = []
+        # for i in QuerySet1:
+        #     labels.append(i["who_label"])
         for j in sorted(labels):
             if not any(d["who_label"] == j for d in d["who_label"]):
-                print(False)
                 ad = {}
                 ad["who_label"] = j
                 ad["value"] = [0] * len(d["who_label"][0]["value"])
