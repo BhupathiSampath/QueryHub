@@ -6,12 +6,13 @@ from .upload import UploadNextstrainView
 from .weekly_sequences import WeeklySequencesView
 from .monthly_sequences import MonthlySequencesView
 from .state_wise_sequences import StateSequencesView
-from .states_auto_complete import StatesAutoCompleteView
-from .lineage_auto_complete import LineageAutoCompleteView
 from .weekly_who_label import LineageClassificationWeek
+from .states_auto_complete import StatesAutoCompleteView
 from .monthly_who_label import LineageClassificationMonth
-from .monthly_lineage_distribution import LineageMonthlyView
+from .lineage_auto_complete import LineageAutoCompleteView
 from .weekly_lineage_distribution import LineageWeeklyView
+from .mutation_auto_complete import MutationAutoCompleteView
+from .monthly_lineage_distribution import LineageMonthlyView
 from .lineage_classification import LineageClassificationView
 from .state_wise_classification import StateLineageClassification
 from queryhub.api.weekly_report.variant_status import VariantStatusView
@@ -133,5 +134,10 @@ urlpatterns = [
         "lineage_auto_complete/",
         LineageAutoCompleteView.as_view(),
         name="lineage_auto_complete",
+    ),
+    path(
+        "mutation_auto_complete/",
+        MutationAutoCompleteView.as_view(),
+        name="mutation_auto_complete",
     ),
 ]
