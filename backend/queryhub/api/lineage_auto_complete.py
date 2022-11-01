@@ -40,6 +40,7 @@ class LineageAutoCompleteSerializer(serializers.ModelSerializer):
         lineage = value.get("lineage")
         division = value.get("division")
         nextclade_pango = value.get("nextclade_pango")
+        aasubstitutions = value.get("aasubstitutions")
         obj = QueryHubModel.objects
         if date:
             obj = obj.filter(date=date)
