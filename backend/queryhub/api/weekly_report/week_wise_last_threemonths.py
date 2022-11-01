@@ -26,17 +26,6 @@ class WeeklyThreemonthsSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, value):
-        QuerySet1 = (
-            QueryHubModel.objects.filter(
-                date__gte="2021-01-01",
-            )
-            .values_list("collection_month")
-            .order_by("date__year", "date__month")
-            .distinct()
-        )
-        months = []
-        for i in QuerySet1:
-            months.extend(i)
         recent_date = QueryHubModel.objects.values("date").latest("date")
         one_month_ago = datetime.datetime(
             recent_date["date"].year, recent_date["date"].month - 3, 1
@@ -53,10 +42,11 @@ class WeeklyThreemonthsSerializer(serializers.ModelSerializer):
             .order_by("date__year")
         )
         d = weekly_report_stacked(QuerySet)
-        QuerySet1 = QueryHubModel.objects.values("who_label").distinct()
-        labels = []
-        for i in QuerySet1:
-            labels.append(i["who_label"])
+        labels = QueryHubModel.objects.values_list("who_label", flat=True).distinct()
+        # labels = [i["who_label"] for i in QuerySet1]
+        # labels = []
+        # for i in QuerySet1:
+        #     labels.append(i["who_label"])
         for j in sorted(labels):
             if not any(d["who_label"] == j for d in d["who_label"]):
                 ad = {}
