@@ -43,10 +43,6 @@ class WeeklyThreemonthsSerializer(serializers.ModelSerializer):
         )
         d = weekly_report_stacked(QuerySet)
         labels = QueryHubModel.objects.values_list("who_label", flat=True).distinct()
-        # labels = [i["who_label"] for i in QuerySet1]
-        # labels = []
-        # for i in QuerySet1:
-        #     labels.append(i["who_label"])
         for j in sorted(labels):
             if not any(d["who_label"] == j for d in d["who_label"]):
                 ad = {}

@@ -60,9 +60,6 @@ class VariantStatusStatewiseSerializer(serializers.ModelSerializer):
                 del items["collection_month"]
             d[i] = weekly_report_stacked(c[i])
         labels = QueryHubModel.objects.values_list("who_label", flat=True).distinct()
-        # labels = []
-        # for i in QuerySet1:
-        #     labels.append(i["who_label"])
         for i in d.values():
             for j in sorted(labels):
                 if not any(d["who_label"] == j for d in i["who_label"]):
