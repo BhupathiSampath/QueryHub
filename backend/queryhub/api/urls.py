@@ -126,18 +126,25 @@ urlpatterns = [
         name="region_wise_analysis_2022",
     ),
     path(
-        "state_auto_complete/",
-        StatesAutoCompleteView.as_view(),
-        name="state_auto_complete",
-    ),
-    path(
-        "lineage_auto_complete/",
-        LineageAutoCompleteView.as_view(),
-        name="lineage_auto_complete",
-    ),
-    path(
-        "mutation_auto_complete/",
-        MutationAutoCompleteView.as_view(),
-        name="mutation_auto_complete",
+        "autocomplete/",
+        include(
+            [
+                path(
+                    "state/",
+                    StatesAutoCompleteView.as_view(),
+                    name="state_auto_complete",
+                ),
+                path(
+                    "lineage/",
+                    LineageAutoCompleteView.as_view(),
+                    name="lineage_auto_complete",
+                ),
+                path(
+                    "mutation/",
+                    MutationAutoCompleteView.as_view(),
+                    name="mutation_auto_complete",
+                ),
+            ]
+        ),
     ),
 ]
