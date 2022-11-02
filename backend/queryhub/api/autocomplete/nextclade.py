@@ -7,7 +7,12 @@ from rest_framework import generics, exceptions, serializers, status
 class CladeAutoCompleteSerializer(serializers.Serializer):
     def validate(self, value):
         obj = self.context["view"].get_queryset().objects
-        return obj.values_list("clade", flat=True).distinct().order_by("clade")
+        return (
+            obj.exclude(clade=None)
+            .values_list("clade", flat=True)
+            .distinct()
+            .order_by("clade")
+        )
 
 
 class CladeAutoCompleteView(generics.GenericAPIView):

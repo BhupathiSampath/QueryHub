@@ -15,7 +15,6 @@ class MutationAutoCompleteSerializer(serializers.Serializer):
         for i in obj:
             if not i is None:
                 data.extend(i.split(","))
-        data.append("None")
         return sorted(list(set(data)))
 
 

@@ -8,7 +8,8 @@ class NextcladePangolinAutoCompleteSerializer(serializers.Serializer):
     def validate(self, value):
         obj = self.context["view"].get_queryset().objects
         return (
-            obj.values_list("nextclade_pango", flat=True)
+            obj.exclude(clade=None)
+            .values_list("nextclade_pango", flat=True)
             .distinct()
             .order_by("nextclade_pango")
         )
