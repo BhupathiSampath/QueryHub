@@ -7,10 +7,10 @@
 			open-on-focus
 			v-model="tags"
 			icon="magnify"
-			type="is-turquoise"
 			:data="filtered"
-			close-type="is-dark"
+			type="is-turquoise"
 			@typing="Filtering"
+			close-type="is-dark"
 			placeholder="Type a clade name"
 		/>
 	</b-field>
