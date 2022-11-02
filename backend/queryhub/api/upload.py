@@ -75,7 +75,6 @@ class UploadNextstrainView(generics.CreateAPIView):
         }
         response = Response(data, status=status.HTTP_200_OK)
         return response
-<<<<<<< HEAD
 
 
 # dataframe column names which are remains same
@@ -122,5 +121,3 @@ class UploadNextstrainView(generics.CreateAPIView):
 # "division_exposure": "division_exposure",
 # "genbank_accession": "genbank_accession",
 # "purpose_of_sequencing": "purpose_of_sequencing",
-=======
->>>>>>> origin/main
