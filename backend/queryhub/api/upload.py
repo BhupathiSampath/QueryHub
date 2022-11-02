@@ -17,7 +17,7 @@ class UploadSerializer(serializers.Serializer):
 
     def validate(self, value):
         file = value.get("nextstrain_file")
-        df = pd.read_csv(file, sep="\t", header=0)
+        df = pd.read_csv(file, sep="\t", header=0, low_memory=False)
         df.sort_values("date", inplace=True)
         df.rename(
             columns={
@@ -76,6 +76,8 @@ class UploadNextstrainView(generics.CreateAPIView):
         response = Response(data, status=status.HTTP_200_OK)
         return response
 
+
+# dataframe column names which are remains same
 
 # "tag": "tag",
 # "age": "age",
