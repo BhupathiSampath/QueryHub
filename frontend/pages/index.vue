@@ -30,5 +30,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+	data: () => ({}),
+	components: {},
+	methods: {},
+	mounted() {
+		this.$nextTick(() => {})
+	},
+}
 </script>
+
+<style scoped></style>
