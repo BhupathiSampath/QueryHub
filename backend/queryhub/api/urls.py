@@ -1,17 +1,13 @@
-from django.urls import path
-
 from .get_data import GetDataView
+from django.urls import path, include
 from .lineages import UniqeLineageCount
 from .upload import UploadNextstrainView
 from .weekly_sequences import WeeklySequencesView
 from .monthly_sequences import MonthlySequencesView
 from .state_wise_sequences import StateSequencesView
 from .weekly_who_label import LineageClassificationWeek
-from .states_auto_complete import StatesAutoCompleteView
 from .monthly_who_label import LineageClassificationMonth
-from .lineage_auto_complete import LineageAutoCompleteView
 from .weekly_lineage_distribution import LineageWeeklyView
-from .mutation_auto_complete import MutationAutoCompleteView
 from .monthly_lineage_distribution import LineageMonthlyView
 from .lineage_classification import LineageClassificationView
 from .state_wise_classification import StateLineageClassification
@@ -30,6 +26,10 @@ from queryhub.api.weekly_report.last_fourmonths_variants import (
 from queryhub.api.weekly_report.state_wise_last_threemonths import (
     StateWiseLastThreemonthsView,
 )
+
+from .autocomplete.states import StatesAutoCompleteView
+from .autocomplete.lineage import LineageAutoCompleteView
+from .autocomplete.mutation import MutationAutoCompleteView
 
 urlpatterns = [
     path("get_data/", GetDataView.as_view(), name="get_data"),
@@ -126,18 +126,25 @@ urlpatterns = [
         name="region_wise_analysis_2022",
     ),
     path(
-        "state_auto_complete/",
-        StatesAutoCompleteView.as_view(),
-        name="state_auto_complete",
-    ),
-    path(
-        "lineage_auto_complete/",
-        LineageAutoCompleteView.as_view(),
-        name="lineage_auto_complete",
-    ),
-    path(
-        "mutation_auto_complete/",
-        MutationAutoCompleteView.as_view(),
-        name="mutation_auto_complete",
+        "autocomplete/",
+        include(
+            [
+                path(
+                    "state/",
+                    StatesAutoCompleteView.as_view(),
+                    name="state_auto_complete",
+                ),
+                path(
+                    "lineage/",
+                    LineageAutoCompleteView.as_view(),
+                    name="lineage_auto_complete",
+                ),
+                path(
+                    "mutation/",
+                    MutationAutoCompleteView.as_view(),
+                    name="mutation_auto_complete",
+                ),
+            ]
+        ),
     ),
 ]

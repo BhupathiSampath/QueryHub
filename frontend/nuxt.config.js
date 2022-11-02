@@ -11,14 +11,15 @@ export default {
 			{ name: 'format-detection', content: 'telephone=no' },
 			{ hid: 'description', name: 'description', content: '' },
 		],
-		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+		link: [{ rel: 'icon', type: 'image/x-icon', href: `${process.env.ROUTER_BASE}favicon.ico` }],
 	},
-	css: [],
+	css: ['static/css/styles.css'],
 	axios: {},
 	plugins: [],
 	components: true,
-	buildModules: [],
-	modules: ['@nuxtjs/axios', ['nuxt-buefy', { materialDesignIcons: false }]],
+	buildModules: ['@nuxtjs/google-fonts'],
+	modules: ['@nuxtjs/axios', 'nuxt-buefy'],
+	router: { base: process.env.ROUTER_BASE },
 	build: {
 		babel: {
 			plugins: [
@@ -27,5 +28,14 @@ export default {
 				['@babel/plugin-proposal-nullish-coalescing-operator', { loose: true }],
 			],
 		},
+	},
+	googleFonts: {
+		preload: true,
+		prefetch: true,
+		download: true,
+		display: 'swap',
+		preconnect: true,
+		overwriting: false,
+		families: { 'Lexend Deca': ['100', '200', '300', '400', '500', '600', '700', '800', '900'] },
 	},
 }

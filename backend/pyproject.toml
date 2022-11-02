@@ -8,6 +8,7 @@ authors = ["Animesh Kumar Singh <animesh.workplace@gmail.com>"]
 python = "^3.10"
 O365 = "^2.0.19"
 mpire = "^2.6.0"
+pandas = "^1.5.1"
 Django = "^4.0.6"
 Pillow = "^9.2.0"
 Markdown = "^3.4.1"
@@ -23,9 +24,11 @@ django-cors-headers = "^3.13.0"
 django-multiselectfield = "^0.1.12"
 djangorestframework-simplejwt = "^5.2.0"
 uvicorn = {version = "^0.18.2", extras = ["standard"]}
+sqlalchemy = "^1.4.42"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+colorama = "^0.4.6"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

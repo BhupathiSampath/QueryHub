@@ -34,16 +34,16 @@ class UploadSerializer(serializers.Serializer):
                 "totalNonACGTNs": "total_non_ACGTNs",
                 "qc.overallStatus": "qc_overallStatus",
                 "totalFrameShifts": "total_frame_shifts",
+                "privateNucMutations.labeledSubstitutions": "privateNucMutations_labeledSubstitutions",
                 "privateNucMutations.unlabeledSubstitutions": "privateNucMutations_unlabeledSubstitutions",
                 "privateNucMutations.totalLabeledSubstitutions": "privateNucMutations_totalLabeledSubstitutions",
                 "privateNucMutations.totalPrivateSubstitutions": "privateNucMutations_totalPrivateSubstitutions",
                 "privateNucMutations.totalUnlabeledSubstitutions": "privateNucMutations_totalUnlabeledSubstitutions",
-                "privateNucMutations.labeledSubstitutions": "privateNucMutations_labeledSubstitutions",
             },
             inplace=True,
         )
         df.loc[df.collection_week == "W52-2022", "collection_week"] = "W01-2022"
-        engine = create_engine("sqlite:///db.sqlite3")
+        engine = create_engine("sqlite:///database/db.sqlite3")
 
         QueryHubModel(
             df.to_sql(
@@ -75,6 +75,7 @@ class UploadNextstrainView(generics.CreateAPIView):
         }
         response = Response(data, status=status.HTTP_200_OK)
         return response
+<<<<<<< HEAD
 
 
 # dataframe column names which are remains same
@@ -121,3 +122,5 @@ class UploadNextstrainView(generics.CreateAPIView):
 # "division_exposure": "division_exposure",
 # "genbank_accession": "genbank_accession",
 # "purpose_of_sequencing": "purpose_of_sequencing",
+=======
+>>>>>>> origin/main
