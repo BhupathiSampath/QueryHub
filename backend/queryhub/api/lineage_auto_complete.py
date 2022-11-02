@@ -1,19 +1,11 @@
+import operator
 import datetime
-from django_filters import utils
-from django.db.models import Count
+from functools import reduce
+from django.db.models import Q
 from ..models import QueryHubModel
-from collections import OrderedDict
 from datetime import date, timedelta
-from dateutil.relativedelta import *
 from .utils import create_uniform_response
-from django.db.models.query import QuerySet
 from rest_framework.response import Response
-from django_filters.constants import EMPTY_VALUES
-from django_filters import rest_framework as filters
-from rest_framework.pagination import PageNumberPagination
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework import generics, exceptions, serializers, status
 
 
@@ -41,7 +33,16 @@ class LineageAutoCompleteSerializer(serializers.ModelSerializer):
         division = value.get("division")
         nextclade_pango = value.get("nextclade_pango")
         aasubstitutions = value.get("aasubstitutions")
+        days = self.context.get("request").data.get("days")
+        present = self.context.get("request").data.get("present")
         obj = QueryHubModel.objects
+        if days and present == False:
+            last_date = QueryHubModel.objects.values("date").latest("date")
+            day = last_date["date"] - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
+        if days and present == True:
+            day = datetime.date.today() - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
         if date:
             obj = obj.filter(date=date)
         if lineage:

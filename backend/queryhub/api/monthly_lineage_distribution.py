@@ -1,20 +1,12 @@
+import operator
 import datetime
-import pandas as pd
-from django_filters import utils
+from functools import reduce
+from django.db.models import Q
 from django.db.models import Count
 from ..models import QueryHubModel
-from collections import OrderedDict
 from datetime import date, timedelta
-from dateutil.relativedelta import *
-from django.db.models.query import QuerySet
 from rest_framework.response import Response
-from django_filters.constants import EMPTY_VALUES
-from django_filters import rest_framework as filters
 from .utils import create_uniform_response, stacked_bar
-from rest_framework.pagination import PageNumberPagination
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework import generics, exceptions, serializers, status
 
 
@@ -46,10 +38,15 @@ class MonthlyLineageSerializer(serializers.ModelSerializer):
         nextclade_pango = value.get("nextclade_pango")
         aasubstitutions = value.get("aasubstitutions")
         days = self.context.get("request").data.get("days")
-        if not days:
-            raise exceptions.ValidationError("Days is rquired field")
-        day = datetime.date.today() - timedelta(days=int(days))
+        present = self.context.get("request").data.get("present")
         obj = QueryHubModel.objects
+        if days and present == False:
+            last_date = QueryHubModel.objects.values("date").latest("date")
+            day = last_date["date"] - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
+        if days and present == True:
+            day = datetime.date.today() - timedelta(days=int(days))
+            obj = obj.filter(date__gte=day)
         if date:
             obj = obj.filter(date=date)
         if lineage:
@@ -84,8 +81,7 @@ class MonthlyLineageSerializer(serializers.ModelSerializer):
                 )
             )
         obj = (
-            obj.filter(date__gte=day)
-            .values("collection_month", "lineage")
+            obj.values("collection_month", "lineage")
             .annotate(Count("strain", distinct=True))
             .order_by("date__year", "date__month")
         )

@@ -1,19 +1,8 @@
 import datetime
-from django_filters import utils
-from django.utils import timezone
 from django.db.models import Count
-from collections import OrderedDict
-from dateutil.relativedelta import *
 from datetime import date, timedelta
 from queryhub.models import QueryHubModel
-from django.db.models.query import QuerySet
 from rest_framework.response import Response
-from django_filters.constants import EMPTY_VALUES
-from django_filters import rest_framework as filters
-from rest_framework.pagination import PageNumberPagination
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.generics import ListAPIView, RetrieveAPIView
 from ..utils import create_uniform_response, weekly_report_stacked
 from rest_framework import generics, exceptions, serializers, status
 
@@ -37,17 +26,6 @@ class WeeklyThreemonthsSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, value):
-        QuerySet1 = (
-            QueryHubModel.objects.filter(
-                date__gte="2021-01-01",
-            )
-            .values_list("collection_month")
-            .order_by("date__year", "date__month")
-            .distinct()
-        )
-        months = []
-        for i in QuerySet1:
-            months.extend(i)
         recent_date = QueryHubModel.objects.values("date").latest("date")
         one_month_ago = datetime.datetime(
             recent_date["date"].year, recent_date["date"].month - 3, 1
@@ -64,10 +42,7 @@ class WeeklyThreemonthsSerializer(serializers.ModelSerializer):
             .order_by("date__year")
         )
         d = weekly_report_stacked(QuerySet)
-        QuerySet1 = QueryHubModel.objects.values("who_label").distinct()
-        labels = []
-        for i in QuerySet1:
-            labels.append(i["who_label"])
+        labels = QueryHubModel.objects.values_list("who_label", flat=True).distinct()
         for j in sorted(labels):
             if not any(d["who_label"] == j for d in d["who_label"]):
                 ad = {}

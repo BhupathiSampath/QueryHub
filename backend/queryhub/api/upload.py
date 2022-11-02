@@ -1,10 +1,8 @@
-import datetime
 import pandas as pd
 from rest_framework import status
 from ..models import QueryHubModel
 from rest_framework import generics
 from sqlalchemy import create_engine
-from rest_framework import serializers
 from rest_framework import serializers
 from .utils import create_uniform_response
 from rest_framework.response import Response
@@ -44,6 +42,7 @@ class UploadSerializer(serializers.Serializer):
             },
             inplace=True,
         )
+        df.loc[df.collection_week == "W52-2022", "collection_week"] = "W01-2022"
         engine = create_engine("sqlite:///db.sqlite3")
 
         QueryHubModel(

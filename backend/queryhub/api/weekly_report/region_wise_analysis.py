@@ -1,20 +1,7 @@
-import datetime
 from itertools import groupby
-from django_filters import utils
-from django.utils import timezone
 from django.db.models import Count
-from collections import OrderedDict
-from dateutil.relativedelta import *
-from datetime import date, timedelta
 from queryhub.models import QueryHubModel
-from django.db.models.query import QuerySet
 from rest_framework.response import Response
-from django_filters.constants import EMPTY_VALUES
-from django_filters import rest_framework as filters
-from rest_framework.pagination import PageNumberPagination
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.generics import ListAPIView, RetrieveAPIView
 from ..utils import create_uniform_response, weekly_report_stacked
 from rest_framework import generics, exceptions, serializers, status
 
@@ -61,10 +48,7 @@ class RegionwiseAnalysisSerializer(serializers.ModelSerializer):
             for items in c[i]:
                 del items["region_type"]
             d[i] = weekly_report_stacked(c[i])
-        QuerySet1 = QueryHubModel.objects.values("who_label").distinct()
-        labels = []
-        for i in QuerySet1:
-            labels.append(i["who_label"])
+        labels = QueryHubModel.objects.values_list("who_label", flat=True).distinct()
         for i in d.values():
             for j in sorted(labels):
                 if not any(d["who_label"] == j for d in i["who_label"]):
