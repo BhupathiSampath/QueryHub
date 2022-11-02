@@ -1,0 +1,186 @@
+/*
+	Averta font set
+*/
+@font-face {
+	font-weight: 300;
+	font-style: normal;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-Light.woff) format('woff'), url(assets/fonts/Averta-Light.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 300;
+	font-style: italic;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-LightItalic.woff) format('woff'),
+		url(assets/fonts/Averta-LightItalic.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 400;
+	font-style: normal;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-Regular.woff) format('woff'), url(assets/fonts/Averta-Regular.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 400;
+	font-style: italic;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-RegularItalic.woff) format('woff'),
+		url(assets/fonts/Averta-RegularItalic.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 500;
+	font-style: normal;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-Semibold.woff) format('woff'), url(assets/fonts/Averta-Semibold.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 500;
+	font-style: italic;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-SemiboldItalic.woff) format('woff'),
+		url(assets/fonts/Averta-Semibold.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 700;
+	font-style: normal;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-Bold.woff) format('woff'), url(assets/fonts/Averta-Bold.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 700;
+	font-style: italic;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-BoldItalic.woff) format('woff'),
+		url(assets/fonts/Averta-BoldItalic.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 800;
+	font-style: normal;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-Extrabold.woff) format('woff'),
+		url(assets/fonts/Averta-Extrabold.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 800;
+	font-style: italic;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-ExtraboldItalic.woff) format('woff'),
+		url(assets/fonts/Averta-ExtraboldItalic.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 900;
+	font-style: normal;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-Black.woff) format('woff'), url(assets/fonts/Averta-Black.eot) format('eot');
+	font-display: swap;
+}
+@font-face {
+	font-weight: 900;
+	font-style: italic;
+	font-family: Averta;
+	src: url(assets/fonts/Averta-BlackItalic.woff) format('woff'),
+		url(assets/fonts/Averta-BlackItalic.eot) format('eot');
+	font-display: swap;
+}
+
+/*
+	Global CSS
+*/
+html {
+	overflow-y: auto;
+	background-color: #f6f8f9;
+}
+pre {
+	border-left: none;
+	border-radius: 9px;
+}
+/*.input,
+.textarea {
+	border-radius: 0.75em;
+}*/
+:focus {
+	outline: none;
+}
+
+/*
+	Scrollbar CSS
+*/
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+::-webkit-scrollbar-thumb {
+	background-color: #065f9e;
+	border-radius: 10px;
+}
+* {
+	scrollbar-color: #065f9e #fff;
+	scrollbar-width: thin;
+}
+
+.select select:focus,
+.taginput .taginput-container.is-focusable:focus,
+.textarea:focus,
+.input:focus,
+.select select.is-focused,
+.taginput .is-focused.taginput-container.is-focusable,
+.is-focused.textarea,
+.is-focused.input,
+.select select:active,
+.taginput .taginput-container.is-focusable:active,
+.textarea:active,
+.input:active,
+.select select.is-active,
+.taginput .is-active.taginput-container.is-focusable,
+.is-active.textarea,
+.is-active.input {
+	border-color: #fff;
+}
+
+.button:focus:not(:active),
+.button.is-focused:not(:active) {
+	box-shadow: none;
+}
+
+.button.is-text {
+	text-decoration: none;
+}
+
+a.navbar-item:focus,
+a.navbar-item:focus-within,
+a.navbar-item:hover,
+a.navbar-item.is-active,
+.navbar-link:focus,
+.navbar-link:focus-within,
+.navbar-link:hover,
+.navbar-link.is-active {
+	color: red;
+}
+
+.navbar.has-shadow {
+	box-shadow: 0 0.2px 4px -2px rgb(70 40 93 / 10%), 0 0.5px 5.1px -2px rgb(70 40 93 / 7%),
+		0 1.4px 5.9px -2px rgb(70 40 93 / 5%), 0 4px 8px -2px rgb(70 40 93 / 4%), 0 0 0 1px rgb(70 40 93 / 3%);
+}
+
+.font-family-averta {
+	font-style: 'Averta';
+}
+
+body,
+button,
+input,
+optgroup,
+select,
+textarea {
+	font-family: 'Averta';
+}
