@@ -1,17 +1,13 @@
-from django.urls import path, include
-
 from .get_data import GetDataView
+from django.urls import path, include
 from .lineages import UniqeLineageCount
 from .upload import UploadNextstrainView
 from .weekly_sequences import WeeklySequencesView
 from .monthly_sequences import MonthlySequencesView
 from .state_wise_sequences import StateSequencesView
 from .weekly_who_label import LineageClassificationWeek
-from .states_auto_complete import StatesAutoCompleteView
 from .monthly_who_label import LineageClassificationMonth
-from .lineage_auto_complete import LineageAutoCompleteView
 from .weekly_lineage_distribution import LineageWeeklyView
-from .mutation_auto_complete import MutationAutoCompleteView
 from .monthly_lineage_distribution import LineageMonthlyView
 from .lineage_classification import LineageClassificationView
 from .state_wise_classification import StateLineageClassification
