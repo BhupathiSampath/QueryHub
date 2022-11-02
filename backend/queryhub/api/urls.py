@@ -31,6 +31,10 @@ from queryhub.api.weekly_report.state_wise_last_threemonths import (
     StateWiseLastThreemonthsView,
 )
 
+from .autocomplete.states import StatesAutoCompleteView
+from .autocomplete.lineage import LineageAutoCompleteView
+from .autocomplete.mutation import MutationAutoCompleteView
+
 urlpatterns = [
     path("get_data/", GetDataView.as_view(), name="get_data"),
     path("upload/", UploadNextstrainView.as_view(), name="upload"),
