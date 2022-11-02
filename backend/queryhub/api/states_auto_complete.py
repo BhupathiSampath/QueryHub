@@ -1,71 +1,17 @@
-import operator
-import datetime
-from functools import reduce
-from django.db.models import Q
 from ..models import QueryHubModel
-from datetime import date, timedelta
 from .utils import create_uniform_response
 from rest_framework.response import Response
 from rest_framework import generics, exceptions, serializers, status
 
 
-class StatesAutoCompleteSerializer(serializers.ModelSerializer):
-    date = serializers.DateField(required=False)
-    lineage = serializers.CharField(required=False)
-    division = serializers.CharField(required=False)
-    aasubstitutions = serializers.CharField(required=False)
-    nextclade_pango = serializers.CharField(required=False)
-
-    class Meta:
-        model = QueryHubModel
-        fields = (
-            "date",
-            "strain",
-            "division",
-            "lineage",
-            "aasubstitutions",
-            "nextclade_pango",
-        )
-
+class StatesAutoCompleteSerializer(serializers.Serializer):
     def validate(self, value):
-        date = value.get("date")
-        lineage = value.get("lineage")
-        division = value.get("division")
-        nextclade_pango = value.get("nextclade_pango")
-        aasubstitutions = value.get("aasubstitutions")
-        days = self.context.get("request").data.get("days")
-        present = self.context.get("request").data.get("present")
-        obj = QueryHubModel.objects
-        if days and present == False:
-            last_date = QueryHubModel.objects.values("date").latest("date")
-            day = last_date["date"] - timedelta(days=int(days))
-            obj = obj.filter(date__gte=day)
-        if days and present == True:
-            day = datetime.date.today() - timedelta(days=int(days))
-            obj = obj.filter(date__gte=day)
-        if date:
-            obj = obj.filter(date=date)
-        if lineage:
-            obj = obj.filter(lineage__in=lineage.split(","))
-        if division:
-            obj = obj.filter(division__icontains=division)
-        if nextclade_pango:
-            obj = obj.filter(nextclade_pango__in=nextclade_pango.split(","))
-        if aasubstitutions:
-            obj = obj.filter(
-                reduce(
-                    operator.and_,
-                    (
-                        Q(aasubstitutions__icontains=x)
-                        for x in aasubstitutions.split(",")
-                    ),
-                )
-            )
-        obj = obj.values_list("division", flat=True).distinct().order_by("division")
-        return obj
+        obj = self.context["view"].get_queryset().objects
+        return obj.values_list("division", flat=True).distinct().order_by("division")
 
 
 class StatesAutoCompleteView(generics.GenericAPIView):
+    queryset = QueryHubModel
     serializer_class = StatesAutoCompleteSerializer
 
     def post(self, request, *args, **kwargs):
