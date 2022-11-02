@@ -185,6 +185,13 @@ textarea {
 	font-family: 'Averta';
 }
 
+.taginput .taginput-container.is-focusable {
+	padding-top: 7px;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-bottom: 5px;
+}
+
 /*
 	Timeline Design CSS
 */
