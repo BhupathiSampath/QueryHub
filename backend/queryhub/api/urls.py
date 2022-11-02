@@ -138,12 +138,12 @@ urlpatterns = [
                     name="state_auto_complete",
                 ),
                 path(
-                    "lineage/",
+                    "pangolineage/",
                     LineageAutoCompleteView.as_view(),
                     name="lineage_auto_complete",
                 ),
                 path(
-                    "mutation/",
+                    "substitution/",
                     MutationAutoCompleteView.as_view(),
                     name="mutation_auto_complete",
                 ),
@@ -153,13 +153,13 @@ urlpatterns = [
                     name="deletion_auto_complete",
                 ),
                 path(
-                    "clade/",
+                    "nextclade/",
                     CladeAutoCompleteView.as_view(),
                     name="clade_auto_complete",
                 ),
                 path(
-                    "nextclade/",
-                    NextCladeAutoCompleteView.as_view(),
+                    "nextcladelineage/",
+                    NextcladePangolinAutoCompleteView.as_view(),
                     name="nextclade_auto_complete",
                 ),
             ]
