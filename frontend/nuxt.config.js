@@ -11,7 +11,7 @@ export default {
 			{ name: 'format-detection', content: 'telephone=no' },
 			{ hid: 'description', name: 'description', content: '' },
 		],
-		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+		link: [{ rel: 'icon', type: 'image/x-icon', href: `${process.env.ROUTER_BASE}favicon.ico` }],
 	},
 	css: ['static/css/styles.css'],
 	axios: {},
@@ -19,6 +19,7 @@ export default {
 	components: true,
 	buildModules: ['@nuxtjs/google-fonts'],
 	modules: ['@nuxtjs/axios', 'nuxt-buefy'],
+	router: { base: process.env.ROUTER_BASE },
 	build: {
 		babel: {
 			plugins: [
