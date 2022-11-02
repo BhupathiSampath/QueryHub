@@ -27,9 +27,12 @@ from queryhub.api.weekly_report.state_wise_last_threemonths import (
     StateWiseLastThreemonthsView,
 )
 
+from .autocomplete.clade import CladeAutoCompleteView
 from .autocomplete.states import StatesAutoCompleteView
 from .autocomplete.lineage import LineageAutoCompleteView
 from .autocomplete.mutation import MutationAutoCompleteView
+from .autocomplete.deletion import DeletionAutoCompleteView
+from .autocomplete.next_clade import NextCladeAutoCompleteView
 
 urlpatterns = [
     path("get_data/", GetDataView.as_view(), name="get_data"),
@@ -143,6 +146,21 @@ urlpatterns = [
                     "mutation/",
                     MutationAutoCompleteView.as_view(),
                     name="mutation_auto_complete",
+                ),
+                path(
+                    "deletion/",
+                    DeletionAutoCompleteView.as_view(),
+                    name="deletion_auto_complete",
+                ),
+                path(
+                    "clade/",
+                    CladeAutoCompleteView.as_view(),
+                    name="clade_auto_complete",
+                ),
+                path(
+                    "nextclade/",
+                    NextCladeAutoCompleteView.as_view(),
+                    name="nextclade_auto_complete",
                 ),
             ]
         ),
