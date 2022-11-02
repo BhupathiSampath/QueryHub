@@ -23,7 +23,14 @@ export default {
 		state: [],
 		filtered: [],
 	}),
-	components: {},
+	props: {
+		value: { type: Array, required: true },
+	},
+	watch: {
+		tags(value) {
+			this.$emit('input', value)
+		},
+	},
 	methods: {
 		Filtering(text) {
 			this.filtered = this.state.filter((d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0)
