@@ -4,10 +4,10 @@
 			<div class="column is-10">
 				<b-field expanded>
 					<b-input
-						v-model="general_query"
-						placeholder="Enter search query"
 						type="search"
 						icon="magnify"
+						v-model="general_query"
+						placeholder="Enter search query"
 					/>
 				</b-field>
 			</div>
@@ -25,7 +25,7 @@
 				<FilterNextcladelineage />
 			</div>
 			<div class="column is-3">
-				<FilterClade />
+				<FilterClade v-model="filters.clade" />
 			</div>
 			<div class="column is-3">
 				<FilterState />
@@ -84,6 +84,9 @@ export default {
 		dates: [],
 		general_query: '',
 		activate_filter: false,
+		filters: {
+			clade: [],
+		},
 	}),
 	// computed: {
 	// 	...mapFields('autocomplete', ['state_name', 'lineage_name']),
