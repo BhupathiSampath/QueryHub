@@ -13,11 +13,11 @@ export default {
 		],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: `${process.env.ROUTER_BASE}favicon.ico` }],
 	},
-	css: ['static/css/styles.css'],
-	axios: {},
 	plugins: [],
 	components: true,
+	css: ['static/css/styles.css'],
 	buildModules: ['@nuxtjs/google-fonts'],
+	axios: { baseURL: process.env.BASE_URL },
 	modules: ['@nuxtjs/axios', 'nuxt-buefy'],
 	router: { base: process.env.ROUTER_BASE },
 	build: {
