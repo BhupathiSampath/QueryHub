@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from .get_data import GetDataView
 from .lineages import UniqeLineageCount
