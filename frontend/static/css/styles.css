@@ -184,3 +184,61 @@ select,
 textarea {
 	font-family: 'Averta';
 }
+
+/*
+	Timeline Design CSS
+*/
+.timeline-design {
+	position: relative;
+}
+.timeline-design::before {
+	bottom: 0;
+	left: 50%;
+	top: -14%;
+	width: 2px;
+	height: 28%;
+	content: '';
+	z-index: -1;
+	display: block;
+	position: absolute;
+	background-color: gray;
+}
+.timeline-design-mobile {
+	position: relative;
+}
+.timeline-design-mobile::before {
+	bottom: 0;
+	left: 50%;
+	top: -27px;
+	width: 2px;
+	height: 50%;
+	content: '';
+	display: block;
+	position: absolute;
+	background-color: gray;
+}
+
+.is-blue {
+	background-color: #2973cc !important;
+	color: #fff !important;
+}
+.is-cyan {
+	background-color: #01bfea !important;
+	color: #fff !important;
+}
+.is-turquoise {
+	background-color: #00c885 !important;
+	color: #fff !important;
+}
+.is-green {
+	background-color: #7db950 !important;
+	color: #fff !important;
+}
+.is-yellow {
+	background-color: #ffc748 !important;
+	color: #000 !important;
+}
+.is-orange {
+	background-color: #ff8f41 !important;
+	color: #000 !important;
+}
