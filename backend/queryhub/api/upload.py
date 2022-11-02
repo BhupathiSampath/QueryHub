@@ -17,7 +17,7 @@ class UploadSerializer(serializers.Serializer):
 
     def validate(self, value):
         file = value.get("nextstrain_file")
-        df = pd.read_csv(file, sep="\t", header=0)
+        df = pd.read_csv(file, sep="\t", header=0, low_memory=False)
         df.sort_values("date", inplace=True)
         df.rename(
             columns={
@@ -34,16 +34,16 @@ class UploadSerializer(serializers.Serializer):
                 "totalNonACGTNs": "total_non_ACGTNs",
                 "qc.overallStatus": "qc_overallStatus",
                 "totalFrameShifts": "total_frame_shifts",
+                "privateNucMutations.labeledSubstitutions": "privateNucMutations_labeledSubstitutions",
                 "privateNucMutations.unlabeledSubstitutions": "privateNucMutations_unlabeledSubstitutions",
                 "privateNucMutations.totalLabeledSubstitutions": "privateNucMutations_totalLabeledSubstitutions",
                 "privateNucMutations.totalPrivateSubstitutions": "privateNucMutations_totalPrivateSubstitutions",
                 "privateNucMutations.totalUnlabeledSubstitutions": "privateNucMutations_totalUnlabeledSubstitutions",
-                "privateNucMutations.labeledSubstitutions": "privateNucMutations_labeledSubstitutions",
             },
             inplace=True,
         )
         df.loc[df.collection_week == "W52-2022", "collection_week"] = "W01-2022"
-        engine = create_engine("sqlite:///db.sqlite3")
+        engine = create_engine("sqlite:///database/db.sqlite3")
 
         QueryHubModel(
             df.to_sql(
