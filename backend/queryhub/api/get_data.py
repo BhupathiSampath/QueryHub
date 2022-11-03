@@ -75,7 +75,6 @@ class GetDataSerializer(serializers.ModelSerializer):
 
 class GetDataView(generics.GenericAPIView):
     serializer_class = GetDataSerializer
-    queryset = QueryHubModel.objects.all()
 
     def post(self, request, *args, **kwargs):
         self.serializer = self.get_serializer(data=request.data)
