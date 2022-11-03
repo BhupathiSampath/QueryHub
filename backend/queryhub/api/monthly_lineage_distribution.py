@@ -62,9 +62,9 @@ class MonthlyLineageSerializer(serializers.ModelSerializer):
                     "AY.127",
                     "BA.2.10",
                     "BA.2.38",
-                    "BA.2.76",
                     "B.1.1.7",
                     "BA.2.75",
+                    "BA.2.76",
                     "B.1.617.2",
                     "B.1.617.1",
                 ]
