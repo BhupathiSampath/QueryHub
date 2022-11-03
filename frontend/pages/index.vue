@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<section class="section">
-			<div class="box">
+			<div class="box wrapper">
 				<FilterManager />
 			</div>
 		</section>
@@ -40,4 +40,10 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.wrapper {
+	height: auto;
+	transform-origin: top;
+	transition: transform 0.3s ease-out;
+}
+</style>
