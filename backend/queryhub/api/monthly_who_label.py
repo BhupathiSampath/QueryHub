@@ -60,6 +60,10 @@ class LineageClassSerializer(serializers.ModelSerializer):
             .annotate(Count("strain", distinct=True))
             .order_by("date__year", "date__month")
         )
+        return self.final_data(obj)
+
+    @staticmethod
+    def final_data(obj):
         data = stacked_bar(obj)
         lst = np.zeros((len(data["who_label"][1]["value"]),), dtype=int)
         for i in range(len(data["who_label"])):
