@@ -4,8 +4,8 @@
 			rounded
 			ellipsis
 			autocomplete
+			icon="filter"
 			v-model="tags"
-			icon="magnify"
 			:data="filtered"
 			type="is-yellow"
 			@typing="Filtering"
