@@ -15,9 +15,14 @@
 				<b-button type="is-info" expanded icon-left="magnify" label="Search" />
 			</div>
 		</div>
-		<b-button type="is-text" label="Advanced Search" @click="ActivateAdvancedFilter" />
+		<b-button
+			type="is-light"
+			label="Advanced Search"
+			@click="ActivateAdvancedFilter"
+			:icon-left="activate_filter ? 'chevron-up' : 'chevron-down'"
+		/>
 
-		<div class="columns is-variable is-1 py-2 is-multiline">
+		<div class="columns is-variable is-1 py-2 is-multiline" v-show="activate_filter">
 			<div class="column is-3">
 				<FilterPangolineage v-model="filters.pangolineage" />
 			</div>
@@ -69,13 +74,14 @@
 					<b-switch :value="true" type="is-info"> Default </b-switch>
 				</b-field>
 			</div>
+			<div class="column has-text-centered mt-4">
+				<b-button type="is-dark" icon-left="check-outline" label="Apply filter" />
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-// import { mapFields } from 'vuex-map-fields'
-
 export default {
 	data: () => ({
 		general_query: '',
@@ -90,27 +96,10 @@ export default {
 			nextcladelineage: [],
 		},
 	}),
-	// computed: {
-	// 	...mapFields('autocomplete', ['state_name', 'lineage_name']),
-	// },
-	components: {},
 	methods: {
 		ActivateAdvancedFilter() {
 			this.activate_filter = !this.activate_filter
 		},
-		// FilteredLineages(text) {
-		// 	this.lineage_name = this.lineage_name.filter(
-		// 		(d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0,
-		// 	)
-		// },
-		// FilteredState(text) {
-		// 	this.state_name.filtered = this.state_name.raw.filter(
-		// 		(d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0,
-		// 	)
-		// },
-		// TestClick(label) {
-		// 	console.log('Clicked on ', label)
-		// },
 	},
 	mounted() {
 		this.$nextTick(() => {})
