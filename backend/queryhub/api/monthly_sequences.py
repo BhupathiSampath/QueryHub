@@ -8,7 +8,6 @@ from datetime import date, timedelta
 from .utils import create_uniform_response
 from rest_framework.response import Response
 from .tasks import text_search, advenced_filter
-from django_filters.constants import EMPTY_VALUES
 from rest_framework import generics, exceptions, serializers, status
 
 
