@@ -8,30 +8,41 @@
 			icon="magnify"
 			:data="filtered"
 			type="is-yellow"
-			close-type="is-dark"
 			@typing="Filtering"
-			placeholder="Type amino acid substitution"
+			close-type="is-dark"
+			:placeholder="tags.length ? '' : 'Type amino acid substitution'"
 		/>
 	</b-field>
 </template>
 
 <script>
+import FuzzySet from 'fuzzyset'
+import { map, filter } from 'lodash'
+
 export default {
 	data: () => ({
+		fs: null,
 		tags: [],
 		state: [],
 		filtered: [],
 	}),
-	components: {},
+	props: {
+		value: { type: Array, required: true },
+	},
+	watch: {
+		tags(value) {
+			this.$emit('input', value)
+		},
+	},
 	methods: {
 		Filtering(text) {
-			this.filtered = this.state.filter((d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0)
+			this.filtered = filter(map(this.fs.get(text), (d) => (d.length ? d[1] : '')))
 		},
 	},
 	mounted() {
 		this.$nextTick(async () => {
 			this.state = await this.$axios.$post('/autocomplete/substitution/')
-			this.filtered = this.state
+			this.fs = FuzzySet(this.state, true, 2, 5)
 		})
 	},
 }
