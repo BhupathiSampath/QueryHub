@@ -1,5 +1,5 @@
 <template>
-	<b-field expanded label="Pangolin assigned lineage">
+	<b-field expanded label="Pangolin assigned lineage (add example*)">
 		<b-taginput
 			rounded
 			ellipsis
@@ -11,7 +11,7 @@
 			:data="filtered"
 			@typing="Filtering"
 			close-type="is-dark"
-			placeholder="Type a lineage name"
+			:placeholder="tags.length ? '' : 'Type a lineage name'"
 		/>
 	</b-field>
 </template>
@@ -23,7 +23,14 @@ export default {
 		state: [],
 		filtered: [],
 	}),
-	components: {},
+	props: {
+		value: { type: Array, required: true },
+	},
+	watch: {
+		tags(value) {
+			this.$emit('input', value)
+		},
+	},
 	methods: {
 		Filtering(text) {
 			this.filtered = this.state.filter((d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0)
