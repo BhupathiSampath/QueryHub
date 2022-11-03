@@ -5,8 +5,8 @@
 			ellipsis
 			autocomplete
 			open-on-focus
+			icon="filter"
 			v-model="tags"
-			icon="magnify"
 			:data="filtered"
 			type="is-turquoise"
 			@typing="Filtering"
