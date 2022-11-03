@@ -12,33 +12,52 @@ from rest_framework import generics, exceptions, serializers, status
 
 class WeeklySequencesSerializer(serializers.ModelSerializer):
     date = serializers.DateField(required=False)
+    clade = serializers.CharField(required=False)
+    strain = serializers.CharField(required=False)
     lineage = serializers.CharField(required=False)
     division = serializers.CharField(required=False)
+    aadeletions = serializers.CharField(required=False)
     nextclade_pango = serializers.CharField(required=False)
     aasubstitutions = serializers.CharField(required=False)
-    strain__count = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = QueryHubModel
         fields = (
             "date",
+            "clade",
             "strain",
-            "division",
             "lineage",
-            "strain__count",
+            "division",
+            "aadeletions",
             "aasubstitutions",
             "nextclade_pango",
         )
 
     def validate(self, value):
         date = value.get("date")
+        clade = value.get("clade")
+        strain = value.get("strain")
         lineage = value.get("lineage")
         division = value.get("division")
+        aadeletions = value.get("aadeletions")
         nextclade_pango = value.get("nextclade_pango")
         aasubstitutions = value.get("aasubstitutions")
-        days = self.context.get("request").data.get("days")
-        present = self.context.get("request").data.get("present")
+        params = self.context.get("request").data
+        days = params.get("days")
+        search = params.get("search")
+        present = params.get("present")
         obj = QueryHubModel.objects
+        if search:
+            obj = obj.filter(
+                Q(date__icontains=search_text)
+                | Q(lineage__icontains=search_text)
+                | Q(division__icontains=search_text)
+                | Q(strain__icontains=search_text)
+                | Q(nextclade_pango__icontains=search_text)
+                | Q(aasubstitutions__icontains=search_text)
+                | Q(aadeletions__icontains=search_text)
+                | Q(clade__icontains=search_text)
+            )
         if days and present == False:
             last_date = QueryHubModel.objects.values("date").latest("date")
             day = last_date["date"] - timedelta(days=int(days))
@@ -48,12 +67,23 @@ class WeeklySequencesSerializer(serializers.ModelSerializer):
             obj = obj.filter(date__gte=day)
         if date:
             obj = obj.filter(date=date)
+        if clade:
+            obj = obj.filter(clade__in=clade.split(","))
+        if strain:
+            obj = obj.filter(strain__in=strain.split(","))
         if lineage:
             obj = obj.filter(lineage__in=lineage.split(","))
         if division:
-            obj = obj.filter(division__icontains=division)
+            obj = obj.filter(division__in=division.split(","))
         if nextclade_pango:
             obj = obj.filter(nextclade_pango__in=nextclade_pango.split(","))
+        if aadeletions:
+            obj = obj.filter(
+                reduce(
+                    operator.and_,
+                    (Q(aadeletions__icontains=x) for x in aadeletions.split(",")),
+                )
+            )
         if aasubstitutions:
             obj = obj.filter(
                 reduce(
