@@ -15,6 +15,7 @@
 				<b-button type="is-info" expanded icon-left="magnify" label="Search" />
 			</div>
 		</div>
+
 		<b-button
 			type="is-light"
 			label="Advanced Search"
@@ -70,8 +71,8 @@
 				</b-field>
 			</div>
 			<div class="column is-2 has-text-centered">
-				<b-field>
-					<b-switch :value="true" type="is-info"> Default </b-switch>
+				<b-field label="Date calculated from last date">
+					<b-switch :value="false" type="is-info"> True </b-switch>
 				</b-field>
 			</div>
 			<div class="column has-text-centered mt-4">
