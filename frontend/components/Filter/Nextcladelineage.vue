@@ -9,9 +9,9 @@
 			icon="magnify"
 			type="is-cyan"
 			:data="filtered"
-			close-type="is-dark"
 			@typing="Filtering"
-			placeholder="Type a lineage name"
+			close-type="is-dark"
+			:placeholder="tags.length ? '' : 'Type a lineage name'"
 		/>
 	</b-field>
 </template>
@@ -23,7 +23,14 @@ export default {
 		state: [],
 		filtered: [],
 	}),
-	components: {},
+	props: {
+		value: { type: Array, required: true },
+	},
+	watch: {
+		tags(value) {
+			this.$emit('input', value)
+		},
+	},
 	methods: {
 		Filtering(text) {
 			this.filtered = this.state.filter((d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0)
