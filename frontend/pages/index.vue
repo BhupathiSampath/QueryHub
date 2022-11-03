@@ -2,11 +2,11 @@
 	<div>
 		<section class="section">
 			<div class="box">
-				<FilterBasic />
+				<FilterManager />
 			</div>
 		</section>
 
-		<section class="section" v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="item">
+		<section class="section timeline-design" v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="item">
 			<div class="box">
 				<div class="field">
 					<label class="label">Email</label>
@@ -30,5 +30,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+	data: () => ({}),
+	components: {},
+	methods: {},
+	mounted() {
+		this.$nextTick(() => {})
+	},
+}
 </script>
+
+<style scoped></style>

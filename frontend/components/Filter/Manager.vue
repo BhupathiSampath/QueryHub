@@ -18,50 +18,23 @@
 		<b-button type="is-text" label="Advanced Search" @click="ActivateAdvancedFilter" />
 
 		<div class="columns is-variable is-1 py-2 is-multiline">
-			<div class="column is-4">
-				<b-field expanded label="Pangolin">
-					<b-input
-						v-model="general_query"
-						placeholder="Enter pangolin lineage"
-						type="search"
-						icon="magnify"
-					/>
-				</b-field>
+			<div class="column is-3">
+				<FilterPangolineage />
 			</div>
-			<div class="column is-4">
-				<b-field expanded label="Nextclade">
-					<b-input
-						v-model="general_query"
-						placeholder="Enter nextclade clade"
-						type="search"
-						icon="magnify"
-					/>
-				</b-field>
+			<div class="column is-3">
+				<FilterNextcladelineage />
 			</div>
-			<div class="column is-4">
-				<b-field expanded label="State">
-					<b-input v-model="general_query" placeholder="Enter state name" type="search" icon="magnify" />
-				</b-field>
+			<div class="column is-3">
+				<FilterClade />
+			</div>
+			<div class="column is-3">
+				<FilterState />
 			</div>
 			<div class="column is-6">
-				<b-field expanded label="Substitution">
-					<b-input
-						v-model="general_query"
-						placeholder="Enter nextclade clade"
-						type="search"
-						icon="magnify"
-					/>
-				</b-field>
+				<FilterSubstitution />
 			</div>
 			<div class="column is-6">
-				<b-field expanded label="Deletion">
-					<b-input
-						v-model="general_query"
-						placeholder="Enter nextclade clade"
-						type="search"
-						icon="magnify"
-					/>
-				</b-field>
+				<FilterDeletion />
 			</div>
 			<div class="column is-5">
 				<b-field label="Select date range">
@@ -101,17 +74,38 @@
 </template>
 
 <script>
+// import { mapFields } from 'vuex-map-fields'
+
 export default {
 	data: () => ({
+		tags1: [],
+		tags2: [],
+		tags3: [],
 		dates: [],
 		general_query: '',
 		activate_filter: false,
 	}),
+	// computed: {
+	// 	...mapFields('autocomplete', ['state_name', 'lineage_name']),
+	// },
 	components: {},
 	methods: {
 		ActivateAdvancedFilter() {
 			this.activate_filter = !this.activate_filter
 		},
+		// FilteredLineages(text) {
+		// 	this.lineage_name = this.lineage_name.filter(
+		// 		(d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0,
+		// 	)
+		// },
+		// FilteredState(text) {
+		// 	this.state_name.filtered = this.state_name.raw.filter(
+		// 		(d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0,
+		// 	)
+		// },
+		// TestClick(label) {
+		// 	console.log('Clicked on ', label)
+		// },
 	},
 	mounted() {
 		this.$nextTick(() => {})

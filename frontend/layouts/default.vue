@@ -12,7 +12,11 @@ export default {
 	components: {},
 	methods: {},
 	mounted() {
-		this.$nextTick(() => {})
+		this.$nextTick(() => {
+			// this.$store.dispatch('autocomplete/GetStateNames')
+			// this.$store.dispatch('autocomplete/GetCladeNames')
+			// this.$store.dispatch('autocomplete/GetLineageNames')
+		})
 	},
 }
 </script>
