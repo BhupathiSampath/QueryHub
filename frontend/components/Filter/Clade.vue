@@ -11,7 +11,7 @@
 			type="is-turquoise"
 			@typing="Filtering"
 			close-type="is-dark"
-			placeholder="Type a clade name"
+			:placeholder="tags.length ? '' : 'Type a clade name'"
 		/>
 	</b-field>
 </template>
