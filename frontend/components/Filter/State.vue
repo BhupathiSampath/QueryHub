@@ -7,11 +7,11 @@
 			open-on-focus
 			v-model="tags"
 			icon="magnify"
-			:data="filtered"
 			type="is-green"
-			close-type="is-dark"
+			:data="filtered"
 			@typing="Filtering"
-			placeholder="Type a state name"
+			close-type="is-dark"
+			:placeholder="tags.length ? '' : 'Type a state name'"
 		/>
 	</b-field>
 </template>
@@ -23,7 +23,14 @@ export default {
 		state: [],
 		filtered: [],
 	}),
-	components: {},
+	props: {
+		value: { type: Array, required: true },
+	},
+	watch: {
+		tags(value) {
+			this.$emit('input', value)
+		},
+	},
 	methods: {
 		Filtering(text) {
 			this.filtered = this.state.filter((d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0)
