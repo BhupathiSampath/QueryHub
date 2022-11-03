@@ -19,6 +19,7 @@
 		"filepond": "4.30.4",
 		"fuzzyset": "1.0.7",
 		"lodash": "4.17.21",
+		"motion": "10.14.3",
 		"nuxt": "2.15.7",
 		"nuxt-buefy": "0.4.24",
 		"v-clipboard": "2.2.3",
