@@ -19,26 +19,26 @@
 
 		<div class="columns is-variable is-1 py-2 is-multiline">
 			<div class="column is-3">
-				<FilterPangolineage />
+				<FilterPangolineage v-model="filters.pangolineage" />
 			</div>
 			<div class="column is-3">
-				<FilterNextcladelineage />
+				<FilterNextcladelineage v-model="filters.nextcladelineage" />
 			</div>
 			<div class="column is-3">
 				<FilterClade v-model="filters.clade" />
 			</div>
 			<div class="column is-3">
-				<FilterState />
+				<FilterState v-model="filters.state" />
 			</div>
 			<div class="column is-6">
-				<FilterSubstitution />
+				<FilterSubstitution v-model="filters.substitution" />
 			</div>
 			<div class="column is-6">
-				<FilterDeletion />
+				<FilterDeletion v-model="filters.deletion" />
 			</div>
 			<div class="column is-5">
 				<b-field label="Select date range">
-					<b-datepicker range v-model="dates" locale="en-IN" placeholder="Click to select..." />
+					<b-datepicker range v-model="filters.dates" locale="en-IN" placeholder="Click to select..." />
 				</b-field>
 			</div>
 			<div class="column is-5">
