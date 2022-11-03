@@ -8,30 +8,40 @@
 			icon="magnify"
 			:data="filtered"
 			type="is-orange"
-			close-type="is-dark"
 			@typing="Filtering"
-			placeholder="Type amino acid deletion"
+			close-type="is-dark"
+			:placeholder="tags.length ? '' : 'Type amino acid deletion'"
 		/>
 	</b-field>
 </template>
 
 <script>
+import FuzzySet from 'fuzzyset'
+import { map, filter } from 'lodash'
+
 export default {
 	data: () => ({
 		tags: [],
 		state: [],
 		filtered: [],
 	}),
-	components: {},
+	props: {
+		value: { type: Array, required: true },
+	},
+	watch: {
+		tags(value) {
+			this.$emit('input', value)
+		},
+	},
 	methods: {
 		Filtering(text) {
-			this.filtered = this.state.filter((d) => d.toString().toLowerCase().indexOf(text.toLowerCase()) >= 0)
+			this.filtered = filter(map(this.fs.get(text), (d) => (d.length ? d[1] : '')))
 		},
 	},
 	mounted() {
 		this.$nextTick(async () => {
 			this.state = await this.$axios.$post('/autocomplete/deletion/')
-			this.filtered = this.state
+			this.fs = FuzzySet(this.state, true, 3, 5)
 		})
 	},
 }
