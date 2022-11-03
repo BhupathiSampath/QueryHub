@@ -10,11 +10,14 @@ from rest_framework import generics, exceptions, serializers, status
 
 class MutationAutoCompleteSerializer(serializers.Serializer):
     def validate(self, value):
-        obj = list(QueryHubModel.objects.values_list("aasubstitutions", flat=True))
+        obj = list(
+            QueryHubModel.objects.values_list("aasubstitutions", flat=True).exclude(
+                aasubstitutions=None
+            )
+        )
         data = []
         for i in obj:
-            if not i is None:
-                data.extend(i.split(","))
+            data.extend(i.split(","))
         return sorted(list(set(data)))
 
 
