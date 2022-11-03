@@ -78,14 +78,16 @@
 
 export default {
 	data: () => ({
-		tags1: [],
-		tags2: [],
-		tags3: [],
-		dates: [],
 		general_query: '',
 		activate_filter: false,
 		filters: {
 			clade: [],
+			state: [],
+			dates: [],
+			deletion: [],
+			pangolineage: [],
+			substitution: [],
+			nextcladelineage: [],
 		},
 	}),
 	// computed: {
