@@ -26,7 +26,7 @@ export const mutations = {
 		state.nextcladelineage_name = payload
 	},
 	SET_NEXTCLADE_NAME(state, payload) {
-		state.clade_name = payload
+		state.nextclade_name = payload
 	},
 	SET_SUBSTITUTION_NAME(state, payload) {
 		state.substitution_name = payload
