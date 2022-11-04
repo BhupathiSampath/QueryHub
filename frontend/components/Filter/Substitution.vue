@@ -28,22 +28,26 @@ export default {
 	}),
 	props: {
 		value: { type: Array, required: true },
+		options: { type: Array, required: true },
 	},
 	watch: {
 		tags(value) {
 			this.$emit('input', value)
+		},
+		options(value) {
+			this.SettingUpFS()
 		},
 	},
 	methods: {
 		Filtering(text) {
 			this.filtered = filter(map(this.fs.get(text), (d) => (d.length ? d[1] : '')))
 		},
+		SettingUpFS() {
+			this.fs = FuzzySet(this.options, true, 2, 5)
+		},
 	},
 	mounted() {
-		this.$nextTick(async () => {
-			this.state = await this.$axios.$post('/autocomplete/substitution/')
-			this.fs = FuzzySet(this.state, true, 2, 5)
-		})
+		this.$nextTick(() => {})
 	},
 }
 </script>
