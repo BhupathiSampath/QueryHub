@@ -25,22 +25,22 @@
 
 		<div class="columns is-variable is-1 py-2 is-multiline" v-show="activate_filter">
 			<div class="column is-3">
-				<FilterPangolineage v-model="filters.pangolineage" />
+				<FilterPangolineage v-model="filters.pangolineage" :options="pangolineage_name" />
 			</div>
 			<div class="column is-3">
-				<FilterNextcladelineage v-model="filters.nextcladelineage" />
+				<FilterNextcladelineage v-model="filters.nextcladelineage" :options="nextcladelineage_name" />
 			</div>
 			<div class="column is-3">
-				<FilterClade v-model="filters.clade" />
+				<FilterClade v-model="filters.clade" :options="nextclade_name" />
 			</div>
 			<div class="column is-3">
-				<FilterState v-model="filters.state" />
+				<FilterState v-model="filters.state" :options="state_name" />
 			</div>
 			<div class="column is-6">
-				<FilterSubstitution v-model="filters.substitution" />
+				<FilterSubstitution v-model="filters.substitution" :options="substitution_name" />
 			</div>
 			<div class="column is-6">
-				<FilterDeletion v-model="filters.deletion" />
+				<FilterDeletion v-model="filters.deletion" :options="deletion_name" />
 			</div>
 			<div class="column is-5">
 				<b-field label="Select date range">
