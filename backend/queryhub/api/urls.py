@@ -35,7 +35,7 @@ from .autocomplete.pangolineage import LineageAutoCompleteView
 from .autocomplete.nextcladepango import NextcladePangolinAutoCompleteView
 
 urlpatterns = [
-    path("get_data/", GetDataView.as_view(), name="get_data"),
+    path("query/", GetDataView.as_view(), name="get_data"),
     path("upload/", UploadNextstrainView.as_view(), name="upload"),
     path("lineages_count/", UniqeLineageCount.as_view(), name="lineages_count"),
     path(
