@@ -25,10 +25,14 @@ export default {
 	}),
 	props: {
 		value: { type: Array, required: true },
+		options: { type: Array, required: true },
 	},
 	watch: {
 		tags(value) {
 			this.$emit('input', value)
+		},
+		options(value) {
+			this.state = value
 		},
 	},
 	methods: {
@@ -38,7 +42,6 @@ export default {
 	},
 	mounted() {
 		this.$nextTick(async () => {
-			this.state = await this.$axios.$post('/autocomplete/state/')
 			this.filtered = this.state
 		})
 	},
