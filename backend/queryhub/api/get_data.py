@@ -67,7 +67,7 @@ class GetDataSerializer(serializers.ModelSerializer):
             "division",
             "aasubstitutions",
             "nextclade_pango",
-        )
+        ).order_by("strain")
         paginator = Paginator(obj, 20)
         response = paginator.page(int(page))
         return response.object_list
