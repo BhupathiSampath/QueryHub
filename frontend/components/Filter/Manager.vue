@@ -99,6 +99,16 @@ export default {
 			nextcladelineage: [],
 		},
 	}),
+	computed: {
+		...mapFields('autocomplete', [
+			'state_name',
+			'deletion_name',
+			'nextclade_name',
+			'pangolineage_name',
+			'substitution_name',
+			'nextcladelineage_name',
+		]),
+	},
 	methods: {
 		ActivateAdvancedFilter() {
 			this.activate_filter = !this.activate_filter
