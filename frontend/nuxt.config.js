@@ -1,4 +1,5 @@
 export default {
+	loading: false,
 	head: {
 		title: 'frontend',
 		htmlAttrs: { lang: 'en' },
