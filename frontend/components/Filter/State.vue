@@ -1,5 +1,11 @@
 <template>
-	<b-field expanded label="State">
+	<b-field expanded>
+		<template #label>
+			State
+			<b-tooltip type="is-dark" label="Help text here for explanation">
+				<b-icon size="is-small" icon="help-circle-outline"></b-icon>
+			</b-tooltip>
+		</template>
 		<b-taginput
 			rounded
 			ellipsis
@@ -41,7 +47,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.$nextTick(async () => {
+		this.$nextTick(() => {
 			this.filtered = this.state
 		})
 	},
