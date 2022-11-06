@@ -89,15 +89,6 @@ export default {
 	data: () => ({
 		general_query: '',
 		activate_filter: false,
-		filters: {
-			clade: [],
-			state: [],
-			dates: [],
-			deletion: [],
-			pangolineage: [],
-			substitution: [],
-			nextcladelineage: [],
-		},
 	}),
 	computed: {
 		...mapFields('autocomplete', [
