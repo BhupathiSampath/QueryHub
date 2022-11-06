@@ -8,29 +8,29 @@
 
 		<section class="section timeline-design">
 			<div class="box">
-				<vs-table>
+				<vs-table ref="table_loader">
 					<template #thead>
 						<vs-tr>
-							<vs-th sort class="is-size-6 has-text-centered">Sample name</vs-th>
-							<vs-th sort class="is-size-6 has-text-centered">Pangolin</vs-th>
-							<vs-th sort class="is-size-6 has-text-centered">Nextclade lineage</vs-th>
-							<vs-th sort class="is-size-6 has-text-centered">Nextclade clade</vs-th>
-							<vs-th sort class="is-size-6 has-text-centered">Substitution</vs-th>
-							<vs-th sort class="is-size-6 has-text-centered">Deletion</vs-th>
+							<vs-th sort class="is-size-6">Sample name</vs-th>
+							<vs-th sort class="is-size-6">State</vs-th>
+							<vs-th sort class="is-size-6">Date</vs-th>
+							<vs-th sort class="is-size-6">Pangolin</vs-th>
+							<vs-th sort class="is-size-6">Nextclade lineage</vs-th>
+							<vs-th sort class="is-size-6">Nextclade clade</vs-th>
 						</vs-tr>
 					</template>
 					<template #tbody>
-						<vs-tr v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]" :key="item">
-							<vs-td class="is-size-6 has-text-centered">1</vs-td>
-							<vs-td class="is-size-6 has-text-centered">2</vs-td>
-							<vs-td class="is-size-6 has-text-centered">3</vs-td>
-							<vs-td class="is-size-6 has-text-centered">4</vs-td>
-							<vs-td class="is-size-6 has-text-centered">5</vs-td>
-							<vs-td class="is-size-6 has-text-centered">6</vs-td>
+						<vs-tr v-for="(item, index) in table_data" :key="index">
+							<vs-td class="is-size-6 has-text-centered">{{ item.strain }}</vs-td>
+							<vs-td class="is-size-6 has-text-centered">{{ item.division }}</vs-td>
+							<vs-td class="is-size-6 has-text-centered">{{ item.date }}</vs-td>
+							<vs-td class="is-size-6 has-text-centered">{{ item.lineage }}</vs-td>
+							<vs-td class="is-size-6 has-text-centered">{{ item.nextclade_pango }}</vs-td>
+							<vs-td class="is-size-6 has-text-centered">{{ item.clade }}</vs-td>
 						</vs-tr>
 					</template>
 					<template #footer>
-						<vs-pagination circle v-model="page" :length="current" />
+						<vs-pagination v-model="page" :length="total_pages" />
 					</template>
 				</vs-table>
 			</div>
