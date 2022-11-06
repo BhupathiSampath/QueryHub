@@ -75,7 +75,9 @@
 import { mapFields } from 'vuex-map-fields'
 
 export default {
-	data: () => ({}),
+	data: () => ({
+		page_loaded: false,
+	}),
 	watch: {
 		async page(value) {
 			const loading = this.$vs.loading({
