@@ -32,6 +32,10 @@ export const mutations = {
 	SET_PAGES(state, payload) {
 		state.total_pages = payload
 	},
+	SET_GRAPH_STATE(state, payload) {
+		state.graphs.state = payload
+		state.graphs.state_graph_loaded = true
+	},
 }
 
 export const actions = {
@@ -54,6 +58,18 @@ export const actions = {
 			const response = await this.$axios.$post('/query/', state.filters)
 			await commit('SET_TABLE', response.data)
 			await commit('SET_PAGES', response.length)
+		} catch (err) {
+			Toast.open({
+				message: 'err',
+				type: 'is-danger',
+				position: 'is-top-right',
+			})
+		}
+	},
+	async GetStateGraph({ commit, dispatch, state }) {
+		try {
+			const response = await this.$axios.$post('/graph/state-count/', state.filters)
+			await commit('SET_GRAPH_STATE', response)
 		} catch (err) {
 			Toast.open({
 				message: 'err',
