@@ -176,6 +176,10 @@ a.navbar-item.is-active,
 	font-style: 'Averta';
 }
 
+.vs-table__th__content {
+	justify-content: center;
+}
+
 body,
 button,
 input,
