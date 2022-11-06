@@ -14,6 +14,10 @@ export const state = () => ({
 		substitution: [],
 		nextcladelineage: [],
 	},
+	graphs: {
+		state: [],
+		state_graph_loaded: false,
+	},
 })
 
 export const getters = {
