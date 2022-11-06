@@ -99,10 +99,24 @@ export default {
 			'substitution_name',
 			'nextcladelineage_name',
 		]),
+		...mapFields([
+			'filters.clade',
+			'filters.state',
+			'filters.dates',
+			'filters.deletion',
+			'filters.pangolineage',
+			'filters.substitution',
+			'filters.nextcladelineage',
+		]),
 	},
 	methods: {
 		ActivateAdvancedFilter() {
 			this.activate_filter = !this.activate_filter
+		},
+		async Search() {
+			const loading = this.$vs.loading()
+			await this.$store.dispatch('UpdateTable')
+			loading.close()
 		},
 	},
 	mounted() {
