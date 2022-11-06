@@ -60,15 +60,23 @@
 </template>
 
 <script>
+import { mapFields } from 'vuex-map-fields'
+
 export default {
-	data: () => ({
-		page: 1,
-		current: 15,
-	}),
+	data: () => ({}),
 	watch: {
-		page(value) {},
+		async page(value) {
+			const loading = this.$vs.loading({
+				target: this.$refs.table_loader,
+			})
+			await this.$store.dispatch('UpdateTable')
+			loading.close()
+		},
 	},
-	components: {},
+	computed: {
+		...mapFields(['table_data', 'total_pages']),
+		...mapFields(['filters.page']),
+	},
 	methods: {},
 	mounted() {
 		this.$nextTick(() => {})
