@@ -14,7 +14,7 @@ from rest_framework import generics, exceptions, serializers, status
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-class GetDataSerializer(serializers.ModelSerializer):
+class GetDataSerializer(serializers.Serializer):
     class Meta:
         model = QueryHubModel
         fields = (
@@ -29,19 +29,19 @@ class GetDataSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, value):
-        date = value.get("date")
-        clade = value.get("clade")
-        strain = value.get("strain")
-        lineage = value.get("lineage")
-        division = value.get("division")
-        aadeletions = value.get("aadeletions")
-        nextclade_pango = value.get("nextclade_pango")
-        aasubstitutions = value.get("aasubstitutions")
-        params = self.context.get("request").data
-        days = params.get("days")
-        page = params.get("page", 1)
-        search = params.get("search")
-        present = params.get("present")
+        request = self.context.get("request").data
+        date = request.get("date")
+        days = request.get("days")
+        clade = request.get("clade")
+        page = request.get("page", 1)
+        search = request.get("search")
+        strain = request.get("strain")
+        present = request.get("present")
+        division = request.get("state")
+        lineage = request.get("pangolineage")
+        aadeletions = request.get("deletion")
+        nextclade_pango = request.get("nextcladelineage")
+        aasubstitutions = request.get("substitution")
         obj = QueryHubModel.objects
 
         if search:
@@ -61,16 +61,16 @@ class GetDataSerializer(serializers.ModelSerializer):
         )
 
         obj = obj.values(
-            "date",
             "strain",
-            "lineage",
             "division",
-            "aasubstitutions",
+            "date",
+            "lineage",
             "nextclade_pango",
+            "clade",
         ).order_by("strain")
-        paginator = Paginator(obj, 20)
+        paginator = Paginator(obj, 25)
         response = paginator.page(int(page))
-        return response.object_list
+        return {"data": response.object_list, "length": paginator.num_pages}
 
 
 class GetDataView(generics.GenericAPIView):
