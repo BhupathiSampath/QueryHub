@@ -37,11 +37,60 @@ class StateSequencesSerializer(serializers.Serializer):
             nextclade_pango,
             aasubstitutions,
         )
-        obj = (
+        obj = list(
             obj.values("division")
             .annotate(Count("strain", distinct=True))
             .order_by("-strain__count")
         )
+        return self.RenameKeys(self.RenameStates(obj), "division", "strain__count")
+
+    @staticmethod
+    def RenameKeys(obj, label, value):
+        return [{"label": item[label], "value": item[value]} for item in obj]
+
+    @staticmethod
+    def RenameStates(obj):
+        rename = {
+            "Andhra Pradesh": "AP",
+            "Arunachal Pradesh": "AR",
+            "Assam": "AS",
+            "Bihar": "BR",
+            "Chhattisgarh": "CT",
+            "Goa": "GA",
+            "Gujarat": "GJ",
+            "Haryana": "HR",
+            "Himachal Pradesh": "HP",
+            "Jharkhand": "JH",
+            "Karnataka": "KA",
+            "Kerala": "KL",
+            "Madhya Pradesh": "MP",
+            "Maharashtra": "MH",
+            "Manipur": "MN",
+            "Meghalaya": "ML",
+            "Mizoram": "MZ",
+            "Nagaland": "NL",
+            "Odisha": "OR",
+            "Punjab": "PB",
+            "Rajasthan": "RJ",
+            "Sikkim": "SK",
+            "Tamil Nadu": "TN",
+            "Telangana": "TG",
+            "Tripura": "TR",
+            "Uttarakhand": "UT",
+            "Uttar Pradesh": "UP",
+            "West Bengal": "WB",
+            "Andaman and Nicobar Islands": "AN",
+            "Chandigarh": "CH",
+            "Dadra and Nagar Haveli and Daman and Diu": "DN",
+            "Delhi": "DL",
+            "Jammu and Kashmir": "JK",
+            "Ladakh": "LA",
+            "Lakshadweep": "LD",
+            "Puducherry": "PY",
+        }
+        for item in obj:
+            item["division"] = rename[item["division"]]
+
         return obj
 
 
