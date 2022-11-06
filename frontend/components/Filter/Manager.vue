@@ -74,9 +74,9 @@
 				<b-field label="Date calculated from last date">
 					<b-switch :value="false" type="is-info"> True </b-switch>
 				</b-field>
-			</div>
+			</div> -->
 			<div class="column has-text-centered mt-4">
-				<b-button type="is-dark" icon-left="check-outline" label="Apply filter" />
+				<b-button type="is-dark" icon-left="check-outline" label="Apply filter" @click="Search" />
 			</div>
 		</div>
 	</div>
