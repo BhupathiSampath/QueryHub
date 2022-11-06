@@ -1,3 +1,9 @@
+import operator
+from functools import reduce
+from django.db.models import Q
+from datetime import date, timedelta
+
+
 def text_search(search, obj):
     obj = obj.filter(
         Q(date__icontains=search)
@@ -35,27 +41,27 @@ def advenced_filter(
     if date:
         obj = obj.filter(date=date)
     if clade:
-        obj = obj.filter(clade__in=clade.split(","))
+        obj = obj.filter(clade__in=clade)
     if strain:
-        obj = obj.filter(strain__in=strain.split(","))
+        obj = obj.filter(strain__in=strain)
     if lineage:
-        obj = obj.filter(lineage__in=lineage.split(","))
+        obj = obj.filter(lineage__in=lineage)
     if division:
-        obj = obj.filter(division__in=division.split(","))
+        obj = obj.filter(division__in=division)
     if nextclade_pango:
-        obj = obj.filter(nextclade_pango__in=nextclade_pango.split(","))
+        obj = obj.filter(nextclade_pango__in=nextclade_pango)
     if aadeletions:
         obj = obj.filter(
             reduce(
                 operator.and_,
-                (Q(aadeletions__icontains=x) for x in aadeletions.split(",")),
+                (Q(aadeletions__icontains=x) for x in aadeletions),
             )
         )
     if aasubstitutions:
         obj = obj.filter(
             reduce(
                 operator.and_,
-                (Q(aasubstitutions__icontains=x) for x in aasubstitutions.split(",")),
+                (Q(aasubstitutions__icontains=x) for x in aasubstitutions),
             )
         )
     return obj
