@@ -116,6 +116,7 @@ export default {
 		async Search() {
 			const loading = this.$vs.loading()
 			await this.$store.dispatch('UpdateTable')
+			await this.$store.dispatch('GetStateGraph')
 			loading.close()
 		},
 	},
