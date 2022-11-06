@@ -25,26 +25,26 @@
 
 		<div class="columns is-variable is-1 py-2 is-multiline" v-show="activate_filter">
 			<div class="column is-3">
-				<FilterPangolineage v-model="filters.pangolineage" :options="pangolineage_name" />
+				<FilterPangolineage v-model="pangolineage" :options="pangolineage_name" />
 			</div>
 			<div class="column is-3">
-				<FilterNextcladelineage v-model="filters.nextcladelineage" :options="nextcladelineage_name" />
+				<FilterNextcladelineage v-model="nextcladelineage" :options="nextcladelineage_name" />
 			</div>
 			<div class="column is-3">
-				<FilterClade v-model="filters.clade" :options="nextclade_name" />
+				<FilterClade v-model="clade" :options="nextclade_name" />
 			</div>
 			<div class="column is-3">
-				<FilterState v-model="filters.state" :options="state_name" />
+				<FilterState v-model="state" :options="state_name" />
 			</div>
 			<div class="column is-6">
-				<FilterSubstitution v-model="filters.substitution" :options="substitution_name" />
+				<FilterSubstitution v-model="substitution" :options="substitution_name" />
 			</div>
 			<div class="column is-6">
-				<FilterDeletion v-model="filters.deletion" :options="deletion_name" />
+				<FilterDeletion v-model="deletion" :options="deletion_name" />
 			</div>
-			<div class="column is-5">
+			<!-- 			<div class="column is-5">
 				<b-field label="Select date range">
-					<b-datepicker range v-model="filters.dates" locale="en-IN" placeholder="Click to select..." />
+					<b-datepicker range v-model="dates" locale="en-IN" placeholder="Click to select..." />
 				</b-field>
 			</div>
 			<div class="column is-5">
