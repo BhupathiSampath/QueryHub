@@ -8,6 +8,18 @@
 
 		<section class="section timeline-design">
 			<div class="box">
+				<GraphBar
+					:chartdata="state"
+					v-if="page_loaded"
+					:formatter="StateFormatter"
+					header="Sequence distribution (State)"
+					:key="state_graph_loaded ? Date.now() + Math.floor(Math.random() * 10000 + 1) : 123"
+				/>
+			</div>
+		</section>
+
+		<section class="section timeline-design">
+			<div class="box">
 				<vs-table ref="table_loader">
 					<template #thead>
 						<vs-tr>
