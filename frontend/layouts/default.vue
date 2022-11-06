@@ -21,6 +21,7 @@ export default {
 			this.$store.dispatch('autocomplete/GetStateNames')
 			this.$store.dispatch('autocomplete/GetDeletionNames')
 			await this.$store.dispatch('autocomplete/GetSubstitutionNames')
+			this.$store.dispatch('GetStateGraph')
 			loading.close()
 		})
 	},
