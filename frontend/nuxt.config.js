@@ -1,5 +1,6 @@
 export default {
 	loading: false,
+	components: true,
 	head: {
 		title: 'frontend',
 		htmlAttrs: { lang: 'en' },
@@ -15,13 +16,12 @@ export default {
 		link: [{ rel: 'icon', type: 'image/x-icon', href: `${process.env.ROUTER_BASE}favicon.ico` }],
 	},
 	plugins: ['@/plugins/plugin-vuesax'],
-	components: true,
-	buildModules: ['@nuxtjs/google-fonts'],
 	axios: { baseURL: process.env.BASE_URL },
 	modules: ['@nuxtjs/axios', 'nuxt-buefy'],
 	router: { base: process.env.ROUTER_BASE },
 	css: ['vuesax/dist/vuesax.css', 'static/css/styles.css'],
 	build: {
+		transpile: [/echarts/, /zrender/],
 		babel: {
 			plugins: [
 				['@babel/plugin-proposal-optional-chaining', { loose: true }],
@@ -30,6 +30,7 @@ export default {
 			],
 		},
 	},
+	buildModules: ['@nuxtjs/google-fonts', '@nuxtjs/composition-api/module', '@nuxtjs/device'],
 	googleFonts: {
 		preload: true,
 		prefetch: true,
