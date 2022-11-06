@@ -64,11 +64,6 @@ urlpatterns = [
         name="weekly_sequences",
     ),
     path(
-        "state_sequences/",
-        StateSequencesView.as_view(),
-        name="state_sequences",
-    ),
-    path(
         "state_lin_classification/",
         StateLineageClassification.as_view(),
         name="state_lin_classification",
@@ -127,6 +122,18 @@ urlpatterns = [
         "region_wise_analysis_2022/",
         Regionwisedata2022.as_view(),
         name="region_wise_analysis_2022",
+    ),
+    path(
+        "graph/",
+        include(
+            [
+                path(
+                    "state-count/",
+                    StateSequencesView.as_view(),
+                    name="state_sequences",
+                ),
+            ]
+        ),
     ),
     path(
         "autocomplete/",
