@@ -27,6 +27,7 @@
 					</b-field>
 				</div>
 				<GraphBar
+					:dosort="false"
 					v-if="page_loaded"
 					:axislabel="false"
 					:chartdata="seq_week"
@@ -34,6 +35,12 @@
 				/>
 			</div>
 		</section>
+
+		<!-- 		<section class="section timeline-design">
+			<div class="box">
+				<GraphMap v-if="page_loaded" :chartdata="RenamedStateLabel" />
+			</div>
+		</section> -->
 
 		<section class="section timeline-design">
 			<div class="box">
