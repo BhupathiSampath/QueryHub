@@ -13,7 +13,6 @@
 					v-if="page_loaded"
 					:formatter="StateFormatter"
 					header="Sequence distribution (State)"
-					:key="state_graph_loaded ? Date.now() + Math.floor(Math.random() * 10000 + 1) : 123"
 				/>
 			</div>
 		</section>
@@ -22,15 +21,16 @@
 			<div class="box">
 				<div class="column has-text-right">
 					<b-field>
-						<b-switch :value="false" type="is-info"> Monthly </b-switch>
+						<b-switch type="is-dark" true-value="Weekly" false-value="Monthly" v-model="mode">
+							Change to {{ mode == 'Monthly' ? 'Weekly' : 'Monthly' }}
+						</b-switch>
 					</b-field>
 				</div>
 				<GraphBar
 					v-if="page_loaded"
 					:axislabel="false"
 					:chartdata="seq_week"
-					header="Sequence distribution (Weekly)"
-					:key="seq_week_graph_loaded ? Date.now() + Math.floor(Math.random() * 10000 + 1) : 123"
+					:header="`Sequence distribution (${mode})`"
 				/>
 			</div>
 		</section>
@@ -103,12 +103,18 @@ export default {
 			await this.$store.dispatch('UpdateTable')
 			loading.close()
 		},
+		async mode(value) {
+			const loading = this.$vs.loading()
+			await this.$store.dispatch('GetSequenceWeeklyGraph')
+			loading.close()
+		},
 	},
 	computed: {
 		...mapFields([
 			'table_data',
 			'total_pages',
 			'filters.page',
+			'filters.mode',
 			'graphs.state',
 			'graphs.seq_week',
 			'graphs.state_graph_loaded',
