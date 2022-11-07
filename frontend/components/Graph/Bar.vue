@@ -30,6 +30,7 @@ export default {
 		formatter: { type: Function },
 		header: { type: String, default: '' },
 		chartdata: { type: Array, required: true },
+		axislabel: { type: Boolean, default: true },
 	},
 	data: () => ({
 		loader_option: {
@@ -75,10 +76,10 @@ export default {
 						borderRadius: this.$device.isDesktop ? [3, 3, 0, 0] : [0, 3, 3, 0],
 					},
 					label: {
-						show: true,
 						fontSize: 11,
 						fontWeight: 500,
 						fontFamily: 'Averta',
+						show: this.axislabel,
 						position: this.$device.isDesktop ? 'top' : 'right',
 					},
 				},
