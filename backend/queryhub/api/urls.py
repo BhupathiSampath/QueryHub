@@ -59,11 +59,6 @@ urlpatterns = [
         name="monthly_sequences",
     ),
     path(
-        "weekly_sequences/",
-        WeeklySequencesView.as_view(),
-        name="weekly_sequences",
-    ),
-    path(
         "state_lin_classification/",
         StateLineageClassification.as_view(),
         name="state_lin_classification",
@@ -131,6 +126,11 @@ urlpatterns = [
                     "state-count/",
                     StateSequencesView.as_view(),
                     name="state_sequences",
+                ),
+                path(
+                    "sequence-count/week/",
+                    WeeklySequencesView.as_view(),
+                    name="weekly_sequences",
                 ),
             ]
         ),
