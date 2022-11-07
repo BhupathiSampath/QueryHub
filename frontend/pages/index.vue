@@ -20,6 +20,23 @@
 
 		<section class="section timeline-design">
 			<div class="box">
+				<div class="column has-text-right">
+					<b-field>
+						<b-switch :value="false" type="is-info"> Monthly </b-switch>
+					</b-field>
+				</div>
+				<GraphBar
+					v-if="page_loaded"
+					:axislabel="false"
+					:chartdata="seq_week"
+					header="Sequence distribution (Weekly)"
+					:key="seq_week_graph_loaded ? Date.now() + Math.floor(Math.random() * 10000 + 1) : 123"
+				/>
+			</div>
+		</section>
+
+		<section class="section timeline-design">
+			<div class="box">
 				<vs-table ref="table_loader">
 					<template #thead>
 						<vs-tr>
@@ -48,7 +65,7 @@
 			</div>
 		</section>
 
-		<section class="section timeline-design" v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="item">
+		<!-- 		<section class="section timeline-design" v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="item">
 			<div class="box">
 				<div class="field">
 					<label class="label">Email</label>
@@ -67,7 +84,7 @@
 				<button class="button is-info">Sign in</button>
 				<b-tag rounded icon="account-check-outline">Rounded Tag</b-tag>
 			</div>
-		</section>
+		</section> -->
 	</div>
 </template>
 
@@ -88,7 +105,15 @@ export default {
 		},
 	},
 	computed: {
-		...mapFields(['table_data', 'total_pages', 'filters.page', 'graphs.state', 'graphs.state_graph_loaded']),
+		...mapFields([
+			'table_data',
+			'total_pages',
+			'filters.page',
+			'graphs.state',
+			'graphs.seq_week',
+			'graphs.state_graph_loaded',
+			'graphs.seq_week_graph_loaded',
+		]),
 	},
 	methods: {
 		StateFormatter(params) {
