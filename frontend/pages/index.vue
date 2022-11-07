@@ -8,11 +8,23 @@
 
 		<section class="section timeline-design">
 			<div class="box">
+				<div class="column has-text-right">
+					<b-field>
+						<b-switch type="is-dark" true-value="Map" false-value="Bar" v-model="map_bar_switcher">
+							Change to {{ map_bar_switcher == 'Map' ? 'Bar' : 'Map' }}
+						</b-switch>
+					</b-field>
+				</div>
 				<GraphBar
 					:chartdata="state"
-					v-if="page_loaded"
 					:formatter="StateFormatter"
 					header="Sequence distribution (State)"
+					v-if="page_loaded && map_bar_switcher == 'Bar'"
+				/>
+				<GraphMap
+					:chartdata="RenamedStateLabel"
+					header="Sequence distribution (State)"
+					v-if="page_loaded && map_bar_switcher == 'Map'"
 				/>
 			</div>
 		</section>
