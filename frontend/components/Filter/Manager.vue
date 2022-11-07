@@ -117,6 +117,7 @@ export default {
 			const loading = this.$vs.loading()
 			await this.$store.dispatch('UpdateTable')
 			await this.$store.dispatch('GetStateGraph')
+			await this.$store.dispatch('GetSequenceWeeklyGraph')
 			loading.close()
 		},
 	},
