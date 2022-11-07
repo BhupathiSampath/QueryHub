@@ -11,6 +11,7 @@ class WeeklySequencesSerializer(serializers.Serializer):
         request = self.context.get("request").data
         date = request.get("date")
         days = request.get("days")
+        mode = request.get("mode")
         clade = request.get("clade")
         page = request.get("page", 1)
         search = request.get("search")
@@ -37,12 +38,20 @@ class WeeklySequencesSerializer(serializers.Serializer):
             nextclade_pango,
             aasubstitutions,
         )
-        obj = (
-            obj.values("collection_week")
-            .annotate(Count("strain", distinct=True))
-            .order_by("date__year", "date__week")
-        )
-        return self.RenameKeys(list(obj), "collection_week", "strain__count")
+        if mode == "Weekly":
+            obj = (
+                obj.values("collection_week")
+                .annotate(Count("strain", distinct=True))
+                .order_by("date__year", "date__week")
+            )
+            return self.RenameKeys(list(obj), "collection_week", "strain__count")
+        else:
+            obj = (
+                obj.values("collection_month")
+                .annotate(Count("strain", distinct=True))
+                .order_by("date__year", "date__month")
+            )
+            return self.RenameKeys(list(obj), "collection_month", "strain__count")
 
     @staticmethod
     def RenameKeys(obj, label, value):
