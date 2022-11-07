@@ -89,11 +89,13 @@
 </template>
 
 <script>
+import { map } from 'lodash'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
 	data: () => ({
 		page_loaded: false,
+		map_bar_switcher: 'Bar',
 	}),
 	watch: {
 		async page(value) {
