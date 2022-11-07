@@ -27,8 +27,8 @@ class GetDataSerializer(serializers.Serializer):
         division = request.get("state")
         lineage = request.get("pangolineage")
         aadeletions = request.get("deletion")
-        nextclade_pango = request.get("nextcladelineage")
         aasubstitutions = request.get("substitution")
+        nextclade_pango = request.get("nextcladelineage")
         obj = QueryHubModel.objects
 
         if search:
