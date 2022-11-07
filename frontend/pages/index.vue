@@ -59,7 +59,7 @@
 						</vs-tr>
 					</template>
 					<template #footer>
-						<vs-pagination v-model="page" :length="total_pages" />
+						<vs-pagination color="#065f9e" v-model="page" :length="total_pages" />
 					</template>
 				</vs-table>
 			</div>
