@@ -16,7 +16,9 @@ export const state = () => ({
 	},
 	graphs: {
 		state: [],
+		seq_week: [],
 		state_graph_loaded: false,
+		seq_week_graph_loaded: false,
 	},
 })
 
@@ -35,6 +37,10 @@ export const mutations = {
 	SET_GRAPH_STATE(state, payload) {
 		state.graphs.state = payload
 		state.graphs.state_graph_loaded = true
+	},
+	SET_GRAPH_SEQ_WEEK(state, payload) {
+		state.graphs.seq_week = payload
+		state.graphs.seq_week_graph_loaded = true
 	},
 }
 
@@ -70,6 +76,18 @@ export const actions = {
 		try {
 			const response = await this.$axios.$post('/graph/state-count/', state.filters)
 			await commit('SET_GRAPH_STATE', response)
+		} catch (err) {
+			Toast.open({
+				message: 'err',
+				type: 'is-danger',
+				position: 'is-top-right',
+			})
+		}
+	},
+	async GetSequenceWeeklyGraph({ commit, dispatch, state }) {
+		try {
+			const response = await this.$axios.$post('/graph/sequence-count/week/', state.filters)
+			await commit('SET_GRAPH_SEQ_WEEK', response)
 		} catch (err) {
 			Toast.open({
 				message: 'err',
