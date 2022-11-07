@@ -5,15 +5,16 @@ from datetime import date, timedelta
 
 
 def text_search(search, obj):
+    print("Search:", search)
     obj = obj.filter(
-        Q(date__icontains=search)
-        | Q(lineage__icontains=search)
-        | Q(division__icontains=search)
-        | Q(strain__icontains=search)
-        | Q(nextclade_pango__icontains=search)
-        | Q(aasubstitutions__icontains=search)
-        | Q(aadeletions__icontains=search)
-        | Q(clade__icontains=search)
+        Q(date__icontains=search[0])
+        | Q(lineage__icontains=search[0])
+        | Q(division__icontains=search[0])
+        | Q(strain__icontains=search[0])
+        | Q(nextclade_pango__icontains=search[0])
+        | Q(aasubstitutions__icontains=search[0])
+        | Q(aadeletions__icontains=search[0])
+        | Q(clade__icontains=search[0])
     )
     return obj
 
