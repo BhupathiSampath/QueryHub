@@ -29,6 +29,7 @@ export default {
 	props: {
 		formatter: { type: Function },
 		header: { type: String, default: '' },
+		dosort: { type: Boolean, default: true },
 		chartdata: { type: Array, required: true },
 		axislabel: { type: Boolean, default: true },
 	},
