@@ -27,6 +27,9 @@ from queryhub.api.weekly_report.state_wise_last_threemonths import (
     StateWiseLastThreemonthsView,
 )
 
+from .graph.state_count import StateCountView
+from .graph.week_month_count import WeekMonthCountView
+
 from .autocomplete.states import StatesAutoCompleteView
 from .autocomplete.nextclade import CladeAutoCompleteView
 from .autocomplete.mutation import MutationAutoCompleteView
