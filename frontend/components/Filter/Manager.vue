@@ -2,17 +2,30 @@
 	<div>
 		<div class="columns is-variable is-1">
 			<div class="column is-10">
-				<b-field expanded>
+				<!-- 				<b-field expanded>
 					<b-input
 						type="search"
 						icon="magnify"
 						v-model="general_query"
 						placeholder="Enter search query"
 					/>
+				</b-field> -->
+				<b-field expanded>
+					<b-taginput
+						rounded
+						ellipsis
+						id="ignore"
+						maxtags="1"
+						type="is-info"
+						icon="magnify"
+						v-model="search"
+						placeholder="Enter search query"
+					>
+					</b-taginput>
 				</b-field>
 			</div>
 			<div class="column has-text-centered">
-				<b-button type="is-info" expanded icon-left="magnify" label="Search" />
+				<b-button type="is-info" expanded icon-left="magnify" label="Search" @click="Search" />
 			</div>
 		</div>
 
@@ -103,6 +116,7 @@ export default {
 			'filters.clade',
 			'filters.state',
 			'filters.dates',
+			'filters.search',
 			'filters.deletion',
 			'filters.pangolineage',
 			'filters.substitution',
