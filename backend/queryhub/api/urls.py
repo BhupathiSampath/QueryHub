@@ -33,6 +33,7 @@ from .autocomplete.mutation import MutationAutoCompleteView
 from .autocomplete.deletion import DeletionAutoCompleteView
 from .autocomplete.pangolineage import LineageAutoCompleteView
 from .autocomplete.nextcladepango import NextcladePangolinAutoCompleteView
+from .autocomplete.combined import CombinedAutoCompleteView
 
 urlpatterns = [
     path("query/", GetDataView.as_view(), name="get_data"),
@@ -168,6 +169,11 @@ urlpatterns = [
                     "nextcladelineage/",
                     NextcladePangolinAutoCompleteView.as_view(),
                     name="nextclade_auto_complete",
+                ),
+                path(
+                    "combined/",
+                    CombinedAutoCompleteView.as_view(),
+                    name="combined_auto_complete",
                 ),
             ]
         ),
