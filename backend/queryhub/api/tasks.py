@@ -5,7 +5,6 @@ from datetime import date, timedelta
 
 
 def text_search(search, obj):
-    print("Search:", search)
     obj = obj.filter(
         Q(date__icontains=search[0])
         | Q(lineage__icontains=search[0])
