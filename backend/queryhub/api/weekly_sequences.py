@@ -15,8 +15,8 @@ class WeeklySequencesSerializer(serializers.Serializer):
         page = request.get("page", 1)
         search = request.get("search")
         strain = request.get("strain")
-        present = request.get("present")
         division = request.get("state")
+        present = request.get("present")
         lineage = request.get("pangolineage")
         aadeletions = request.get("deletion")
         aasubstitutions = request.get("substitution")
@@ -40,7 +40,7 @@ class WeeklySequencesSerializer(serializers.Serializer):
         obj = (
             obj.values("collection_week")
             .annotate(Count("strain", distinct=True))
-            .order_by("date__year", "date__week")
+            .order_by("date__year", "collection_week")
         )
         return self.RenameKeys(list(obj), "collection_week", "strain__count")
 
