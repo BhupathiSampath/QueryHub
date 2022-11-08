@@ -119,7 +119,8 @@ export default {
 		[THEME_KEY]: 'light',
 	},
 	props: {
-		chartdata: { type: Array },
+		header: { type: String, required: true },
+		chartdata: { type: Array, required: true },
 	},
 	watch: {
 		chartdata(value) {
