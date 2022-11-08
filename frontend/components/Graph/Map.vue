@@ -1,9 +1,8 @@
 <template>
 	<div>
 		<div class="has-text-centered is-size-5 has-text-medium has-text-weight-semibold has-text-grey-dark">
-			Sequence distribution (State)
+			{{ header }}
 		</div>
-
 		<v-chart class="chart" :loading="false" :option="options" :loading-options="loader_option" />
 	</div>
 </template>
