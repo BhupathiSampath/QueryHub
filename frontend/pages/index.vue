@@ -8,12 +8,23 @@
 
 		<section class="section timeline-design">
 			<div class="box">
+				<div class="column has-text-right">
+					<b-field>
+						<b-switch type="is-dark" true-value="Map" false-value="Bar" v-model="map_bar_switcher">
+							Change to {{ map_bar_switcher == 'Map' ? 'Bar' : 'Map' }}
+						</b-switch>
+					</b-field>
+				</div>
 				<GraphBar
 					:chartdata="state"
-					v-if="page_loaded"
 					:formatter="StateFormatter"
 					header="Sequence distribution (State)"
-					:key="state_graph_loaded ? Date.now() + Math.floor(Math.random() * 10000 + 1) : 123"
+					v-if="page_loaded && map_bar_switcher == 'Bar'"
+				/>
+				<GraphMap
+					:chartdata="RenamedStateLabel"
+					header="Sequence distribution (State)"
+					v-if="page_loaded && map_bar_switcher == 'Map'"
 				/>
 			</div>
 		</section>
@@ -22,18 +33,26 @@
 			<div class="box">
 				<div class="column has-text-right">
 					<b-field>
-						<b-switch :value="false" type="is-info"> Monthly </b-switch>
+						<b-switch type="is-dark" true-value="Weekly" false-value="Monthly" v-model="mode">
+							Change to {{ mode == 'Monthly' ? 'Weekly' : 'Monthly' }}
+						</b-switch>
 					</b-field>
 				</div>
 				<GraphBar
+					:dosort="false"
 					v-if="page_loaded"
 					:axislabel="false"
 					:chartdata="seq_week"
-					header="Sequence distribution (Weekly)"
-					:key="seq_week_graph_loaded ? Date.now() + Math.floor(Math.random() * 10000 + 1) : 123"
+					:header="`Sequence distribution (${mode})`"
 				/>
 			</div>
 		</section>
+
+		<!-- 		<section class="section timeline-design">
+			<div class="box">
+				<GraphMap v-if="page_loaded" :chartdata="RenamedStateLabel" />
+			</div>
+		</section> -->
 
 		<section class="section timeline-design">
 			<div class="box">
@@ -59,7 +78,7 @@
 						</vs-tr>
 					</template>
 					<template #footer>
-						<vs-pagination v-model="page" :length="total_pages" />
+						<vs-pagination color="#065f9e" v-model="page" :length="total_pages" />
 					</template>
 				</vs-table>
 			</div>
@@ -89,11 +108,13 @@
 </template>
 
 <script>
+import { map } from 'lodash'
 import { mapFields } from 'vuex-map-fields'
 
 export default {
 	data: () => ({
 		page_loaded: false,
+		map_bar_switcher: 'Bar',
 	}),
 	watch: {
 		async page(value) {
@@ -103,17 +124,67 @@ export default {
 			await this.$store.dispatch('UpdateTable')
 			loading.close()
 		},
+		async mode(value) {
+			const loading = this.$vs.loading()
+			await this.$store.dispatch('GetSequenceWeeklyGraph')
+			loading.close()
+		},
 	},
 	computed: {
 		...mapFields([
 			'table_data',
 			'total_pages',
 			'filters.page',
+			'filters.mode',
 			'graphs.state',
 			'graphs.seq_week',
 			'graphs.state_graph_loaded',
 			'graphs.seq_week_graph_loaded',
 		]),
+		RenamedStateLabel() {
+			let rename = {
+				AP: 'Andhra Pradesh',
+				AR: 'Arunachal Pradesh',
+				AS: 'Assam',
+				BR: 'Bihar',
+				CT: 'Chhattisgarh',
+				GA: 'Goa',
+				GJ: 'Gujarat',
+				HR: 'Haryana',
+				HP: 'Himachal Pradesh',
+				JH: 'Jharkhand',
+				KA: 'Karnataka',
+				KL: 'Kerala',
+				MP: 'Madhya Pradesh',
+				MH: 'Maharashtra',
+				MN: 'Manipur',
+				ML: 'Meghalaya',
+				MZ: 'Mizoram',
+				NL: 'Nagaland',
+				OR: 'Odisha',
+				PB: 'Punjab',
+				RJ: 'Rajasthan',
+				SK: 'Sikkim',
+				TN: 'Tamil Nadu',
+				TG: 'Telangana',
+				TR: 'Tripura',
+				UT: 'Uttarakhand',
+				UP: 'Uttar Pradesh',
+				WB: 'West Bengal',
+				AN: 'Andaman and Nicobar Islands',
+				CH: 'Chandigarh',
+				DN: 'Dadra and Nagar Haveli and Daman and Diu',
+				DL: 'Delhi',
+				JK: 'Jammu and Kashmir',
+				LA: 'Ladakh',
+				LD: 'Lakshadweep',
+				PY: 'Puducherry',
+			}
+			let output = map(this.state, (d) => {
+				return { name: rename[d.label], value: d.value }
+			})
+			return output
+		},
 	},
 	methods: {
 		StateFormatter(params) {

@@ -29,6 +29,7 @@ export default {
 	props: {
 		formatter: { type: Function },
 		header: { type: String, default: '' },
+		dosort: { type: Boolean, default: true },
 		chartdata: { type: Array, required: true },
 		axislabel: { type: Boolean, default: true },
 	},
@@ -70,8 +71,14 @@ export default {
 				{
 					type: 'bar',
 					data: this.$device.isDesktop
-						? map(orderBy(this.chartdata, ['label'], 'asc'), (d) => d.value)
-						: map(orderBy(this.chartdata, ['label'], 'desc'), (d) => d.value),
+						? map(
+								this.dosort ? orderBy(this.chartdata, ['label'], 'asc') : this.chartdata,
+								(d) => d.value,
+						  )
+						: map(
+								this.dosort ? orderBy(this.chartdata, ['label'], 'desc') : this.chartdata,
+								(d) => d.value,
+						  ),
 					itemStyle: {
 						borderRadius: this.$device.isDesktop ? [3, 3, 0, 0] : [0, 3, 3, 0],
 					},
@@ -109,7 +116,10 @@ export default {
 						alignWithLabel: true,
 					},
 				}
-				this.options.xAxis.data = map(orderBy(this.chartdata, ['label'], 'asc'), (d) => d.label)
+				this.options.xAxis.data = map(
+					this.dosort ? orderBy(this.chartdata, ['label'], 'asc') : this.chartdata,
+					(d) => d.label,
+				)
 			} else {
 				this.options.grid = {
 					left: 0,
@@ -135,7 +145,10 @@ export default {
 						alignWithLabel: true,
 					},
 				}
-				this.options.yAxis.data = map(orderBy(this.chartdata, ['label'], 'desc'), (d) => d.label)
+				this.options.yAxis.data = map(
+					this.dosort ? orderBy(this.chartdata, ['label'], 'desc') : this.chartdata,
+					(d) => d.label,
+				)
 			}
 			this.options.series = output
 		},

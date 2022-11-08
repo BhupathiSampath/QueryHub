@@ -15,6 +15,7 @@ export default {
 		],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: `${process.env.ROUTER_BASE}favicon.ico` }],
 	},
+	device: { refreshOnResize: true },
 	plugins: ['@/plugins/plugin-vuesax'],
 	axios: { baseURL: process.env.BASE_URL },
 	modules: ['@nuxtjs/axios', 'nuxt-buefy'],

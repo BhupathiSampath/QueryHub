@@ -2,9 +2,7 @@ from .get_data import GetDataView
 from django.urls import path, include
 from .lineages import UniqeLineageCount
 from .upload import UploadNextstrainView
-from .weekly_sequences import WeeklySequencesView
 from .monthly_sequences import MonthlySequencesView
-from .state_wise_sequences import StateSequencesView
 from .weekly_who_label import LineageClassificationWeek
 from .monthly_who_label import LineageClassificationMonth
 from .weekly_lineage_distribution import LineageWeeklyView
@@ -26,6 +24,9 @@ from queryhub.api.weekly_report.last_fourmonths_variants import (
 from queryhub.api.weekly_report.state_wise_last_threemonths import (
     StateWiseLastThreemonthsView,
 )
+
+from .graph.state_count import StateCountView
+from .graph.week_month_count import WeekMonthCountView
 
 from .autocomplete.states import StatesAutoCompleteView
 from .autocomplete.nextclade import CladeAutoCompleteView
@@ -125,13 +126,13 @@ urlpatterns = [
             [
                 path(
                     "state-count/",
-                    StateSequencesView.as_view(),
-                    name="state_sequences",
+                    StateCountView.as_view(),
+                    name="state_wise_count",
                 ),
                 path(
-                    "sequence-count/week/",
-                    WeeklySequencesView.as_view(),
-                    name="weekly_sequences",
+                    "sequence-count/",
+                    WeekMonthCountView.as_view(),
+                    name="week_or_month_wise_count",
                 ),
             ]
         ),

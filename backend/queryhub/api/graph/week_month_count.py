@@ -1,16 +1,17 @@
 from django.db.models import Count
-from ..models import QueryHubModel
-from .utils import create_uniform_response
+from queryhub.models import QueryHubModel
 from rest_framework.response import Response
-from .tasks import text_search, advenced_filter
+from queryhub.api.utils import create_uniform_response
+from queryhub.api.tasks import text_search, advenced_filter
 from rest_framework import generics, exceptions, serializers, status
 
 
-class WeeklySequencesSerializer(serializers.Serializer):
+class WeekMonthCountSerializer(serializers.Serializer):
     def validate(self, value):
         request = self.context.get("request").data
         date = request.get("date")
         days = request.get("days")
+        mode = request.get("mode")
         clade = request.get("clade")
         page = request.get("page", 1)
         search = request.get("search")
@@ -37,20 +38,28 @@ class WeeklySequencesSerializer(serializers.Serializer):
             nextclade_pango,
             aasubstitutions,
         )
-        obj = (
-            obj.values("collection_week")
-            .annotate(Count("strain", distinct=True))
-            .order_by("date__year", "collection_week")
-        )
-        return self.RenameKeys(list(obj), "collection_week", "strain__count")
+        if mode == "Weekly":
+            obj = (
+                obj.values("collection_week")
+                .annotate(Count("strain", distinct=True))
+                .order_by("date__year", "date__week")
+            )
+            return self.RenameKeys(list(obj), "collection_week", "strain__count")
+        else:
+            obj = (
+                obj.values("collection_month")
+                .annotate(Count("strain", distinct=True))
+                .order_by("date__year", "date__month")
+            )
+            return self.RenameKeys(list(obj), "collection_month", "strain__count")
 
     @staticmethod
     def RenameKeys(obj, label, value):
         return [{"label": item[label], "value": item[value]} for item in obj]
 
 
-class WeeklySequencesView(generics.GenericAPIView):
-    serializer_class = WeeklySequencesSerializer
+class WeekMonthCountView(generics.GenericAPIView):
+    serializer_class = WeekMonthCountSerializer
 
     def post(self, request, *args, **kwargs):
         self.serializer = self.get_serializer(data=request.data)

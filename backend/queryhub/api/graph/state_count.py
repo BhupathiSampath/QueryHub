@@ -1,12 +1,12 @@
 from django.db.models import Count
-from ..models import QueryHubModel
-from .utils import create_uniform_response
+from queryhub.models import QueryHubModel
 from rest_framework.response import Response
-from .tasks import text_search, advenced_filter
+from queryhub.api.utils import create_uniform_response
+from queryhub.api.tasks import text_search, advenced_filter
 from rest_framework import generics, exceptions, serializers, status
 
 
-class StateSequencesSerializer(serializers.Serializer):
+class StateCountSerializer(serializers.Serializer):
     def validate(self, value):
         request = self.context.get("request").data
         date = request.get("date")
@@ -94,8 +94,8 @@ class StateSequencesSerializer(serializers.Serializer):
         return obj
 
 
-class StateSequencesView(generics.GenericAPIView):
-    serializer_class = StateSequencesSerializer
+class StateCountView(generics.GenericAPIView):
+    serializer_class = StateCountSerializer
 
     def post(self, request, *args, **kwargs):
         self.serializer = self.get_serializer(data=request.data)

@@ -9,7 +9,9 @@ export const state = () => ({
 		clade: [],
 		state: [],
 		dates: [],
+		search: [],
 		deletion: [],
+		mode: 'Monthly',
 		pangolineage: [],
 		substitution: [],
 		nextcladelineage: [],
@@ -86,7 +88,7 @@ export const actions = {
 	},
 	async GetSequenceWeeklyGraph({ commit, dispatch, state }) {
 		try {
-			const response = await this.$axios.$post('/graph/sequence-count/week/', state.filters)
+			const response = await this.$axios.$post('/graph/sequence-count/', state.filters)
 			await commit('SET_GRAPH_SEQ_WEEK', response)
 		} catch (err) {
 			Toast.open({
