@@ -7,25 +7,7 @@ from rest_framework.response import Response
 from rest_framework import generics, exceptions, serializers, status
 
 
-class SubmittingLabSerializer(serializers.ModelSerializer):
-    date = serializers.DateField(required=False)
-    lineage = serializers.CharField(required=False)
-    division = serializers.CharField(required=False)
-    nextclade_pango = serializers.CharField(required=False)
-    strain__count = serializers.IntegerField(read_only=True)
-
-    class Meta:
-        model = QueryHubModel
-        fields = (
-            "strain__count",
-            "date",
-            "strain",
-            "division",
-            "lineage",
-            "nextclade_pango",
-            "submitting_lab",
-        )
-
+class SubmittingLabSerializer(serializers.Serializer):
     def validate(self, value):
         recent_date = QueryHubModel.objects.values("date").latest("date")
         one_month_ago = datetime.datetime(

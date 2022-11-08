@@ -12,24 +12,7 @@ def key_func(k):
     return k["collection_month"]
 
 
-class VariantStatusStatewiseSerializer(serializers.ModelSerializer):
-    date = serializers.DateField(required=False)
-    lineage = serializers.CharField(required=False)
-    division = serializers.CharField(required=False)
-    nextclade_pango = serializers.CharField(required=False)
-    strain__count = serializers.IntegerField(read_only=True)
-
-    class Meta:
-        model = QueryHubModel
-        fields = (
-            "strain__count",
-            "date",
-            "strain",
-            "division",
-            "lineage",
-            "nextclade_pango",
-        )
-
+class VariantStatusStatewiseSerializer(serializers.Serializer):
     def validate(self, value):
         a = []
         b = []
