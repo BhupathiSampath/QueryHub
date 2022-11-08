@@ -85,19 +85,15 @@ export default {
 			},
 			series: [
 				{
-					type: 'map',
-					map: 'India',
 					data: [],
 					zoom: 1.14,
+					type: 'map',
+					map: 'India',
 					aspectScale: 0.85,
 					nameProperty: 'st_nm',
-					itemStyle: {
-						borderColor: '#9C9090',
-					},
+					itemStyle: { borderColor: '#9C9090' },
 					emphasis: {
-						label: {
-							show: false,
-						},
+						label: { show: false },
 						itemStyle: {
 							borderColor: '#2D232E',
 							areaColor: 'inherit',
@@ -105,9 +101,7 @@ export default {
 						},
 					},
 					select: {
-						label: {
-							show: false,
-						},
+						label: { show: false },
 						itemStyle: {
 							borderColor: '#2D232E',
 							areaColor: 'inherit',
