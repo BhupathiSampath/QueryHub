@@ -1,6 +1,7 @@
 export default {
 	loading: false,
 	components: true,
+	server: { port: 3000, host: '0.0.0.0' },
 	head: {
 		title: 'frontend',
 		htmlAttrs: { lang: 'en' },
