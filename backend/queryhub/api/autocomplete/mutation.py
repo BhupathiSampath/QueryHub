@@ -1,23 +1,26 @@
 import operator
 import datetime
+import numpy as np
 from functools import reduce
 from django.db.models import Q
 from queryhub.models import QueryHubModel
 from datetime import date, timedelta
 from rest_framework.response import Response
 from rest_framework import generics, exceptions, serializers, status
+from django.db.models import Prefetch
 
 
 class MutationAutoCompleteSerializer(serializers.Serializer):
     def validate(self, value):
         obj = list(
-            QueryHubModel.objects.values_list("aasubstitutions", flat=True).exclude(
-                aasubstitutions=None
-            )
+            QueryHubModel.objects.prefetch_related("groups")
+            .values_list("aasubstitutions", flat=True)
+            .filter(~Q(aasubstitutions=None))
         )
         data = []
         for i in obj:
-            data.extend(i.split(","))
+            if not i is None:
+                data.extend(i.split(","))
         return sorted(list(set(data)))
 
 
