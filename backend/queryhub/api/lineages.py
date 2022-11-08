@@ -12,33 +12,20 @@ from .tasks import text_search, advenced_filter
 from rest_framework import generics, exceptions, serializers, status
 
 
-class LineageCountSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = QueryHubModel
-        fields = (
-            "date",
-            "clade",
-            "strain",
-            "lineage",
-            "division",
-            "aadeletions",
-            "aasubstitutions",
-            "nextclade_pango",
-        )
-
+class LineageCountSerializer(serializers.Serializer):
     def validate(self, value):
-        date = value.get("date")
-        clade = value.get("clade")
-        strain = value.get("strain")
-        lineage = value.get("lineage")
-        division = value.get("division")
-        aadeletions = value.get("aadeletions")
-        nextclade_pango = value.get("nextclade_pango")
-        aasubstitutions = value.get("aasubstitutions")
-        params = self.context.get("request").data
-        days = params.get("days")
-        search = params.get("search")
-        present = params.get("present")
+        request = self.context.get("request").data
+        date = request.get("date")
+        days = request.get("days")
+        clade = request.get("clade")
+        search = request.get("search")
+        strain = request.get("strain")
+        division = request.get("state")
+        present = request.get("present")
+        lineage = request.get("pangolineage")
+        aadeletions = request.get("deletion")
+        aasubstitutions = request.get("substitution")
+        nextclade_pango = request.get("nextcladelineage")
         obj = QueryHubModel.objects
         if search:
             obj = text_search(search, obj)

@@ -15,19 +15,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class GetDataSerializer(serializers.Serializer):
-    class Meta:
-        model = QueryHubModel
-        fields = (
-            "date",
-            "clade",
-            "strain",
-            "lineage",
-            "division",
-            "aadeletions",
-            "aasubstitutions",
-            "nextclade_pango",
-        )
-
     def validate(self, value):
         request = self.context.get("request").data
         date = request.get("date")
@@ -36,12 +23,12 @@ class GetDataSerializer(serializers.Serializer):
         page = request.get("page", 1)
         search = request.get("search")
         strain = request.get("strain")
-        present = request.get("present")
         division = request.get("state")
+        present = request.get("present")
         lineage = request.get("pangolineage")
         aadeletions = request.get("deletion")
-        nextclade_pango = request.get("nextcladelineage")
         aasubstitutions = request.get("substitution")
+        nextclade_pango = request.get("nextcladelineage")
         obj = QueryHubModel.objects
 
         if search:
