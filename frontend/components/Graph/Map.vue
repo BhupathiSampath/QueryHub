@@ -154,11 +154,4 @@ export default {
 .chart {
 	height: 600px;
 }
-.medium {
-	height: 600px;
-}
-.dropdown-content {
-	height: 15em;
-	overflow: auto;
-}
 </style>
