@@ -16,13 +16,13 @@ import {
 	TooltipComponent,
 	VisualMapComponent,
 } from 'echarts/components'
+import { map, max, ceil } from 'lodash'
 import { MapChart } from 'echarts/charts'
 import IN from '@/assets/maps/india.json'
 import { feature } from 'topojson-client'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import { use, registerMap } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
-import { map, max, ceil, capitalize } from 'lodash'
 
 use([
 	MapChart,
