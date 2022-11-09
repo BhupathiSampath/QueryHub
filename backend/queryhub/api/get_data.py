@@ -24,6 +24,7 @@ class GetDataSerializer(serializers.Serializer):
         search = request.get("search")
         strain = request.get("strain")
         division = request.get("state")
+        # sorting = request.get("sorting")
         present = request.get("present")
         lineage = request.get("pangolineage")
         aadeletions = request.get("deletion")
