@@ -60,8 +60,8 @@ export default {
 			visualMap: {
 				min: 0,
 				max: 10,
-				orient: 'horizontal',
 				align: 'top',
+				orient: 'horizontal',
 				inRange: {
 					color: [
 						'#e6f2fb',
@@ -95,17 +95,17 @@ export default {
 					emphasis: {
 						label: { show: false },
 						itemStyle: {
-							borderColor: '#2D232E',
-							areaColor: 'inherit',
 							borderWidth: 2,
+							areaColor: 'inherit',
+							borderColor: '#2D232E',
 						},
 					},
 					select: {
 						label: { show: false },
 						itemStyle: {
-							borderColor: '#2D232E',
-							areaColor: 'inherit',
 							borderWidth: 2,
+							areaColor: 'inherit',
+							borderColor: '#2D232E',
 						},
 					},
 				},
