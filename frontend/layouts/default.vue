@@ -14,15 +14,15 @@ export default {
 	mounted() {
 		this.$nextTick(async () => {
 			const loading = this.$vs.loading()
+			this.$store.dispatch('autocomplete/GetSubstitutionNames')
 			this.$store.dispatch('GetTable')
 			this.$store.dispatch('GetStateGraph')
 			this.$store.dispatch('GetSequenceWeeklyGraph')
 			this.$store.dispatch('autocomplete/GetCladeNames')
 			this.$store.dispatch('autocomplete/GetStateNames')
 			this.$store.dispatch('autocomplete/GetPangolineageNames')
-			this.$store.dispatch('autocomplete/GetNextcladelineageNames')
 			this.$store.dispatch('autocomplete/GetDeletionNames')
-			await this.$store.dispatch('autocomplete/GetSubstitutionNames')
+			await this.$store.dispatch('autocomplete/GetNextcladelineageNames')
 			loading.close()
 		})
 	},
