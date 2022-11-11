@@ -3,17 +3,17 @@ import datetime
 import numpy as np
 from functools import reduce
 from django.db.models import Q
-from queryhub.models import QueryHubModel
 from datetime import date, timedelta
+from django.db.models import Prefetch
+from queryhub.models import QueryHubModel
 from rest_framework.response import Response
 from rest_framework import generics, exceptions, serializers, status
-from django.db.models import Prefetch
 
 
 class MutationAutoCompleteSerializer(serializers.Serializer):
     def validate(self, value):
         obj = list(
-            QueryHubModel.objects.prefetch_related("groups")
+            QueryHubModel.objects.prefetch_related("aasubstitutions")
             .values_list("aasubstitutions", flat=True)
             .filter(~Q(aasubstitutions=None))
         )

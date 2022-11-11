@@ -2,8 +2,8 @@ import operator
 import datetime
 from functools import reduce
 from django.db.models import Q
-from queryhub.models import QueryHubModel
 from datetime import date, timedelta
+from queryhub.models import QueryHubModel
 from rest_framework.response import Response
 from rest_framework import generics, exceptions, serializers, status
 

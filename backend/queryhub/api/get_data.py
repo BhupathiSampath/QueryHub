@@ -57,6 +57,7 @@ class GetDataSerializer(serializers.Serializer):
         ).order_by("strain")
         paginator = Paginator(obj, 25)
         response = paginator.page(int(page))
+        print(paginator.count)
         return {"data": response.object_list, "length": paginator.num_pages}
 
 
