@@ -31,6 +31,7 @@ class GetDataSerializer(serializers.Serializer):
         aasubstitutions = request.get("substitution")
         nextclade_pango = request.get("nextcladelineage")
         obj = QueryHubModel.objects
+        total = obj.count()
 
         if search:
             obj = text_search(search, obj)
@@ -58,7 +59,31 @@ class GetDataSerializer(serializers.Serializer):
         ).order_by("strain")
         paginator = Paginator(obj, 25)
         response = paginator.page(int(page))
-        return {"data": response.object_list, "length": paginator.num_pages}
+        filtered = obj.count()
+        state = obj.values_list("division", flat=True).distinct().count()
+        lineages = obj.values_list("lineage", flat=True).distinct().count()
+        nextcladepango = (
+            obj.exclude(clade=None)
+            .values_list("nextclade_pango", flat=True)
+            .distinct()
+            .count()
+        )
+        clade = (
+            obj.exclude(clade=None).values_list("clade", flat=True).distinct().count()
+        )
+        output = {
+            "total": total,
+            "clade": clade,
+            "state": state,
+            "filtered": filtered,
+            "lineages": lineages,
+            "nextcladepango": nextcladepango,
+        }
+        return {
+            "data": response.object_list,
+            "length": paginator.num_pages,
+            "stats": output,
+        }
 
 
 class GetDataView(generics.GenericAPIView):
