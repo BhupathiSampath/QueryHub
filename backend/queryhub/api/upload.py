@@ -34,11 +34,11 @@ class UploadSerializer(serializers.Serializer):
                 "totalNonACGTNs": "total_non_ACGTNs",
                 "qc.overallStatus": "qc_overallStatus",
                 "totalFrameShifts": "total_frame_shifts",
-                "privateNucMutations.labeledSubstitutions": "privateNucMutations_labeledSubstitutions",
                 "privateNucMutations.unlabeledSubstitutions": "privateNucMutations_unlabeledSubstitutions",
                 "privateNucMutations.totalLabeledSubstitutions": "privateNucMutations_totalLabeledSubstitutions",
                 "privateNucMutations.totalPrivateSubstitutions": "privateNucMutations_totalPrivateSubstitutions",
                 "privateNucMutations.totalUnlabeledSubstitutions": "privateNucMutations_totalUnlabeledSubstitutions",
+                "privateNucMutations.labeledSubstitutions": "privateNucMutations_labeledSubstitutions",
             },
             inplace=True,
         )
