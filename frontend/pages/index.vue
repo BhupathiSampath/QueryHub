@@ -13,25 +13,37 @@
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">Genomes Uploaded</p>
-							<p class="title">3,456</p>
+							<p class="title">{{stats.total}}</p>
 						</div>
 					</div>
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">Lineages Found</p>
-							<p class="title">123</p>
+							<p class="title">{{stats.lineages}}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">NextcladePango Found</p>
+							<p class="title">{{stats.nextcladepango}}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Clades Found</p>
+							<p class="title">{{stats.clade}}</p>
 						</div>
 					</div>
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">States Covered</p>
-							<p class="title">456K</p>
+							<p class="title">{{stats.state}}</p>
 						</div>
 					</div>
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">Filtered Set</p>
-							<p class="title">789</p>
+							<p class="title">{{stats.filtered}}</p>
 						</div>
 					</div>
 				</nav>
@@ -194,6 +206,7 @@ export default {
 	},
 	computed: {
 		...mapFields([
+			'stats',
 			'table_data',
 			'total_pages',
 			'filters.page',
