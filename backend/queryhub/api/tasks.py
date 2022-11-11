@@ -4,7 +4,70 @@ from django.db.models import Q
 from datetime import date, timedelta
 
 
+def text_search2(search, obj):
+    print("Search:", search)
+    obj = obj.filter(
+        Q(
+            reduce(
+                operator.and_,
+                (Q(lineage__icontains=x) for x in search),
+            )
+        )
+        | Q(
+            reduce(
+                operator.and_,
+                (Q(division__icontains=x) for x in search),
+            )
+        )
+        | Q(
+            reduce(
+                operator.and_,
+                (Q(clade__icontains=x) for x in search),
+            )
+        )
+        | Q(
+            reduce(
+                operator.and_,
+                (Q(strain__icontains=x) for x in search),
+            )
+        )
+        | Q(
+            reduce(
+                operator.and_,
+                (Q(aadeletions__icontains=x) for x in search),
+            )
+        )
+        | Q(
+            reduce(
+                operator.and_,
+                (Q(nextclade_pango__icontains=x) for x in search),
+            )
+        )
+        | Q(
+            reduce(
+                operator.and_,
+                (Q(aasubstitutions__icontains=x) for x in search),
+            )
+        )
+    )
+    return obj
+
+
 def text_search(search, obj):
+    print("Search:", search)
+    obj = obj.filter(
+        Q(clade__in=search)
+        | Q(strain__in=search)
+        | Q(lineage__in=search)
+        | Q(division__in=search)
+        | Q(aadeletions__in=search)
+        | Q(nextclade_pango__in=search)
+        | Q(aasubstitutions__in=search)
+    )
+    return obj
+
+
+def text_search1(search, obj):
     print("Search:", search)
     obj = obj.filter(
         Q(date__icontains=search[0])
