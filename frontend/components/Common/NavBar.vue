@@ -1,5 +1,5 @@
 <template>
-	<b-navbar shadow fixed-top>
+	<b-navbar shadow fixed-top spaced>
 		<template #brand>
 			<b-navbar-item tag="router-link" :to="{ path: '/' }">
 				<span class="is-size-5 has-text-weight-bold">XPLORECoV2</span>

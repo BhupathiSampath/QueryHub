@@ -1,9 +1,8 @@
 <template>
 	<div>
 		<div class="has-text-centered is-size-5 has-text-medium has-text-weight-semibold has-text-grey-dark">
-			Sequence distribution (State)
+			{{ header }}
 		</div>
-
 		<v-chart class="chart" :loading="false" :option="options" :loading-options="loader_option" />
 	</div>
 </template>
@@ -16,13 +15,13 @@ import {
 	TooltipComponent,
 	VisualMapComponent,
 } from 'echarts/components'
+import { map, max, ceil } from 'lodash'
 import { MapChart } from 'echarts/charts'
 import IN from '@/assets/maps/india.json'
 import { feature } from 'topojson-client'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import { use, registerMap } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
-import { map, max, ceil, capitalize } from 'lodash'
 
 use([
 	MapChart,
@@ -61,8 +60,8 @@ export default {
 			visualMap: {
 				min: 0,
 				max: 10,
-				orient: 'horizontal',
 				align: 'top',
+				orient: 'horizontal',
 				inRange: {
 					color: [
 						'#e6f2fb',
@@ -86,33 +85,27 @@ export default {
 			},
 			series: [
 				{
-					type: 'map',
-					map: 'India',
 					data: [],
 					zoom: 1.14,
+					type: 'map',
+					map: 'India',
 					aspectScale: 0.85,
 					nameProperty: 'st_nm',
-					itemStyle: {
-						borderColor: '#9C9090',
-					},
+					itemStyle: { borderColor: '#9C9090' },
 					emphasis: {
-						label: {
-							show: false,
-						},
+						label: { show: false },
 						itemStyle: {
-							borderColor: '#2D232E',
-							areaColor: 'inherit',
 							borderWidth: 2,
+							areaColor: 'inherit',
+							borderColor: '#2D232E',
 						},
 					},
 					select: {
-						label: {
-							show: false,
-						},
+						label: { show: false },
 						itemStyle: {
-							borderColor: '#2D232E',
-							areaColor: 'inherit',
 							borderWidth: 2,
+							areaColor: 'inherit',
+							borderColor: '#2D232E',
 						},
 					},
 				},
@@ -126,7 +119,8 @@ export default {
 		[THEME_KEY]: 'light',
 	},
 	props: {
-		chartdata: { type: Array },
+		header: { type: String, required: true },
+		chartdata: { type: Array, required: true },
 	},
 	watch: {
 		chartdata(value) {
@@ -153,12 +147,5 @@ export default {
 <style scoped>
 .chart {
 	height: 600px;
-}
-.medium {
-	height: 600px;
-}
-.dropdown-content {
-	height: 15em;
-	overflow: auto;
 }
 </style>

@@ -4,6 +4,7 @@ import { getField, updateField } from 'vuex-map-fields'
 export const state = () => ({
 	total_pages: 1,
 	table_data: [],
+	stats: {},
 	filters: {
 		page: 1,
 		clade: [],
@@ -33,6 +34,9 @@ export const mutations = {
 	SET_TABLE(state, payload) {
 		state.table_data = payload
 	},
+	SET_STATS(state, payload) {
+		state.stats = payload
+	},
 	SET_PAGES(state, payload) {
 		state.total_pages = payload
 	},
@@ -48,11 +52,24 @@ export const mutations = {
 
 export const actions = {
 	async nuxtServerInit({ commit, dispatch }, { app, store }) {},
+	async GetStats({ commit, dispatch }) {
+		try {
+			const response = await this.$axios.$post('/stats/')
+			await commit('SET_STATS', response)
+		} catch (err) {
+			Toast.open({
+				message: 'err',
+				type: 'is-danger',
+				position: 'is-top-right',
+			})
+		}
+	},
 	async GetTable({ commit, dispatch }) {
 		try {
 			const response = await this.$axios.$post('/query/')
 			await commit('SET_TABLE', response.data)
 			await commit('SET_PAGES', response.length)
+			await commit('SET_STATS', response.stats)
 		} catch (err) {
 			Toast.open({
 				message: 'err',
@@ -66,6 +83,7 @@ export const actions = {
 			const response = await this.$axios.$post('/query/', state.filters)
 			await commit('SET_TABLE', response.data)
 			await commit('SET_PAGES', response.length)
+			await commit('SET_STATS', response.stats)
 		} catch (err) {
 			Toast.open({
 				message: 'err',

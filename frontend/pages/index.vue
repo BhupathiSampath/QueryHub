@@ -8,6 +8,60 @@
 
 		<section class="section timeline-design">
 			<div class="box">
+				<div class="title is-5 has-text-centered has-text-grey-light">Data statistics</div>
+				<nav class="level">
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Genomes Uploaded</p>
+							<p class="title">{{stats.total}}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Lineages Found</p>
+							<p class="title">{{stats.lineages}}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">NextcladePango Found</p>
+							<p class="title">{{stats.nextcladepango}}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Clades Found</p>
+							<p class="title">{{stats.clade}}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">States Covered</p>
+							<p class="title">{{stats.state}}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Filtered Set</p>
+							<p class="title">{{stats.filtered}}</p>
+						</div>
+					</div>
+				</nav>
+				<hr />
+				<div class="title is-5 has-text-centered has-text-grey-light">Tool versions</div>
+				<nav class="level">
+					<div class="level-item has-text-centered" v-for="(tool, value) in version" :key="tool">
+						<div>
+							<p class="heading">{{ value }}</p>
+							<p class="title">{{ tool }}</p>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</section>
+
+		<section class="section timeline-design">
+			<div class="box">
 				<div class="column has-text-right">
 					<b-field>
 						<b-switch type="is-dark" true-value="Map" false-value="Bar" v-model="map_bar_switcher">
@@ -26,6 +80,20 @@
 					header="Sequence distribution (State)"
 					v-if="page_loaded && map_bar_switcher == 'Map'"
 				/>
+
+				<!-- 				<div class="column has-text-centered">
+					<div class="is-size-5 has-text-medium has-text-weight-semibold has-text-grey-dark">
+						Sequence distribution (State)
+					</div>
+				</div>
+				<div class="columns" v-if="page_loaded && state_graph_loaded">
+					<div class="column">
+						<GraphBar vertical :chartdata="state" :formatter="StateFormatter" />
+					</div>
+					<div class="column">
+						<GraphMap :chartdata="RenamedStateLabel" />
+					</div>
+				</div> -->
 			</div>
 		</section>
 
@@ -48,23 +116,17 @@
 			</div>
 		</section>
 
-		<!-- 		<section class="section timeline-design">
-			<div class="box">
-				<GraphMap v-if="page_loaded" :chartdata="RenamedStateLabel" />
-			</div>
-		</section> -->
-
 		<section class="section timeline-design">
 			<div class="box">
 				<vs-table ref="table_loader">
 					<template #thead>
 						<vs-tr>
-							<vs-th sort class="is-size-6">Sample name</vs-th>
-							<vs-th sort class="is-size-6">State</vs-th>
-							<vs-th sort class="is-size-6">Date</vs-th>
-							<vs-th sort class="is-size-6">Pangolin</vs-th>
-							<vs-th sort class="is-size-6">Nextclade lineage</vs-th>
-							<vs-th sort class="is-size-6">Nextclade clade</vs-th>
+							<vs-th sort class="is-size-6" @click="Sort($event)">Sample name</vs-th>
+							<vs-th sort class="is-size-6" @click="Sort($event)">State</vs-th>
+							<vs-th sort class="is-size-6" @click="Sort($event)">Date</vs-th>
+							<vs-th sort class="is-size-6" @click="Sort($event)">Pangolin</vs-th>
+							<vs-th sort class="is-size-6" @click="Sort($event)">Nextclade lineage</vs-th>
+							<vs-th sort class="is-size-6" @click="Sort($event)">Nextclade clade</vs-th>
 						</vs-tr>
 					</template>
 					<template #tbody>
@@ -83,6 +145,7 @@
 				</vs-table>
 			</div>
 		</section>
+		<DesignCircle />
 
 		<!-- 		<section class="section timeline-design" v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="item">
 			<div class="box">
@@ -115,6 +178,17 @@ export default {
 	data: () => ({
 		page_loaded: false,
 		map_bar_switcher: 'Bar',
+		version: {
+			pangolin: '4.1.3',
+			'pangolin-data': '1.15.1',
+			constellations: 'v0.1.10',
+			scorpio: '0.3.17',
+			usher: '0.5.6',
+			gofasta: '0.0.5',
+			minimap2: '2.24-r1122',
+			faToVcf: '426',
+			nextclade: '2.8.0',
+		},
 	}),
 	watch: {
 		async page(value) {
@@ -132,6 +206,7 @@ export default {
 	},
 	computed: {
 		...mapFields([
+			'stats',
 			'table_data',
 			'total_pages',
 			'filters.page',
@@ -187,6 +262,9 @@ export default {
 		},
 	},
 	methods: {
+		Sort(Event) {
+			console.log(Event, this, this.$vs)
+		},
 		StateFormatter(params) {
 			let rename = {
 				AP: 'Andhra Pradesh',

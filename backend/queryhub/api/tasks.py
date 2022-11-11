@@ -54,7 +54,6 @@ def text_search2(search, obj):
 
 
 def text_search(search, obj):
-    print("Search:", search)
     obj = obj.filter(
         Q(clade__in=search)
         | Q(strain__in=search)

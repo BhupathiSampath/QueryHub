@@ -4,11 +4,11 @@
 			{{ header }}
 		</div>
 		<v-chart
-			class="chart"
 			ref="bar-chart"
 			:loading="false"
 			:option="options"
 			:loading-options="loader_option"
+			:class="vertical ? 'chart-vertical' : 'chart'"
 		/>
 	</div>
 </template>
@@ -32,6 +32,7 @@ export default {
 		dosort: { type: Boolean, default: true },
 		chartdata: { type: Array, required: true },
 		axislabel: { type: Boolean, default: true },
+		vertical: { type: Boolean, default: false },
 	},
 	data: () => ({
 		loader_option: {
@@ -70,28 +71,29 @@ export default {
 			let output = [
 				{
 					type: 'bar',
-					data: this.$device.isDesktop
-						? map(
-								this.dosort ? orderBy(this.chartdata, ['label'], 'asc') : this.chartdata,
-								(d) => d.value,
-						  )
-						: map(
-								this.dosort ? orderBy(this.chartdata, ['label'], 'desc') : this.chartdata,
-								(d) => d.value,
-						  ),
+					data:
+						this.$device.isDesktop && !this.vertical
+							? map(
+									this.dosort ? orderBy(this.chartdata, ['label'], 'asc') : this.chartdata,
+									(d) => d.value,
+							  )
+							: map(
+									this.dosort ? orderBy(this.chartdata, ['label'], 'desc') : this.chartdata,
+									(d) => d.value,
+							  ),
 					itemStyle: {
-						borderRadius: this.$device.isDesktop ? [3, 3, 0, 0] : [0, 3, 3, 0],
+						borderRadius: this.$device.isDesktop && !this.vertical ? [3, 3, 0, 0] : [0, 3, 3, 0],
 					},
 					label: {
 						fontSize: 11,
 						fontWeight: 500,
 						fontFamily: 'Averta',
 						show: this.axislabel,
-						position: this.$device.isDesktop ? 'top' : 'right',
+						position: this.$device.isDesktop && !this.vertical ? 'top' : 'right',
 					},
 				},
 			]
-			if (this.$device.isDesktop) {
+			if (this.$device.isDesktop && !this.vertical) {
 				this.options.grid = {
 					left: 5,
 					right: '0%',
@@ -164,6 +166,9 @@ export default {
 <style scoped>
 .chart {
 	height: 400px;
+}
+.chart-vertical {
+	height: 600px;
 }
 /* Mobile Devices */
 @media (max-width: 480px) {
