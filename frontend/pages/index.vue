@@ -88,7 +88,7 @@
 			</div>
 		</section>
 
-		<section class="section timeline-design">
+		<section :class="ClassSection">
 			<div class="box">
 				<div class="column has-text-right">
 					<b-field>
@@ -125,7 +125,7 @@
 			</div>
 		</section>
 
-		<section class="section timeline-design">
+		<section :class="ClassSection">
 			<div class="box">
 				<div class="column has-text-right">
 					<b-field>
@@ -144,7 +144,7 @@
 			</div>
 		</section>
 
-		<section class="section timeline-design">
+		<section :class="ClassSection">
 			<div class="box">
 				<vs-table ref="table_loader">
 					<template #thead>
