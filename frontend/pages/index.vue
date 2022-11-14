@@ -1,49 +1,77 @@
 <template>
-	<div>
+	<div class="bg-design">
 		<section class="section">
+			<div class="box box-size is-clipped is-relative">
+				<DesignCircle :class="ClassCircle" />
+				<div class="column is-offset-2 is-10 has-text-justified">
+					<!-- 					<span class="is-size-5 has-text-weight-bold has-background-white mt-1 is-block"
+						>XPLORECoV2</span
+					> -->
+					Sunt duis fugiat velit dolore velit id laboris aliqua enim dolor enim qui fugiat et dolor ex
+					cupidatat anim commodo eu sed dolore sed ut do qui velit reprehenderit pariatur et mollit in
+					laborum do irure ut veniam nostrud voluptate elit in veniam officia cillum sunt mollit esse
+					excepteur incididunt excepteur ex magna sed nostrud ut dolore labore excepteur mollit tempor
+					magna nostrud velit aute sit laborum aliquip id nulla fugiat anim cillum ex et eiusmod elit sed
+					sit culpa elit laboris proident deserunt in elit et deserunt culpa consectetur fugiat dolor
+					velit amet voluptate sed sunt non commodo culpa qui esse ullamco minim qui nulla in laborum
+					commodo irure duis ex enim veniam sint in velit proident ut cupidatat aliquip consectetur irure
+					proident dolore id eu ut eu dolor qui consequat cupidatat eiusmod qui velit ut consectetur
+					consectetur consequat et consequat consequat duis ullamco id ut enim in est aliquip qui aliqua
+					consequat cillum veniam veniam ullamco magna duis duis adipisicing in enim aliquip exercitation
+					veniam dolor magna ut est aliqua cillum dolore pariatur enim pariatur culpa adipisicing laboris
+					tempor eiusmod adipisicing in minim aliquip non minim aute incididunt ut fugiat culpa mollit in
+					sunt sit consequat sint qui commodo dolore eu laborum dolor tempor irure irure velit proident
+					anim fugiat velit ut esse aliquip officia irure culpa magna consequat labore ea ex est tempor
+					dolor id excepteur nulla ut pariatur exercitation labore deserunt veniam anim reprehenderit
+					amet laborum veniam reprehenderit tempor eu in velit enim.
+				</div>
+			</div>
+		</section>
+
+		<section :class="ClassSection">
 			<div class="box">
 				<FilterManager />
 			</div>
 		</section>
 
-		<section class="section timeline-design">
+		<section :class="ClassSection">
 			<div class="box">
 				<div class="title is-5 has-text-centered has-text-grey-light">Data statistics</div>
 				<nav class="level">
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">Genomes Uploaded</p>
-							<p class="title">{{stats.total}}</p>
+							<p class="title">{{ stats.total }}</p>
 						</div>
 					</div>
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">Lineages Found</p>
-							<p class="title">{{stats.lineages}}</p>
+							<p class="title">{{ stats.lineages }}</p>
 						</div>
 					</div>
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">NextcladePango Found</p>
-							<p class="title">{{stats.nextcladepango}}</p>
+							<p class="title">{{ stats.nextcladepango }}</p>
 						</div>
 					</div>
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">Clades Found</p>
-							<p class="title">{{stats.clade}}</p>
+							<p class="title">{{ stats.clade }}</p>
 						</div>
 					</div>
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">States Covered</p>
-							<p class="title">{{stats.state}}</p>
+							<p class="title">{{ stats.state }}</p>
 						</div>
 					</div>
 					<div class="level-item has-text-centered">
 						<div>
 							<p class="heading">Filtered Set</p>
-							<p class="title">{{stats.filtered}}</p>
+							<p class="title">{{ stats.filtered }}</p>
 						</div>
 					</div>
 				</nav>
