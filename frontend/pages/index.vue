@@ -349,4 +349,38 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.top-corner {
+	top: -65%;
+	left: -3%;
+	width: 20%;
+	z-index: 0;
+	position: absolute;
+}
+.top-corner-mobile {
+	top: -50%;
+	left: -30%;
+	width: 100%;
+	z-index: 0;
+	opacity: 0.1;
+	position: absolute;
+}
+.z-1 {
+	z-index: 1;
+}
+.z-2 {
+	z-index: 2;
+}
+.z-3 {
+	z-index: 3;
+}
+.z-4 {
+	z-index: 4;
+}
+.z-5 {
+	z-index: 5;
+}
+.z-6 {
+	z-index: 6;
+}
+</style>
