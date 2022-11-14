@@ -19,7 +19,22 @@
 <script>
 export default {
 	data: () => ({}),
-	components: {},
+	props: {
+		transparent: { type: Boolean, required: true },
+	},
+	computed: {
+		ClassNavbar() {
+			return this.transparent ? 'is-clipped no-shadow' : 'is-clipped has-shadow'
+		},
+		ClassText() {
+			return this.$device.isDesktop
+				? 'is-size-5 has-text-weight-bold mt-1'
+				: 'is-size-5 has-text-weight-bold mt-1 shift-text'
+		},
+		ClassCircle() {
+			return this.$device.isDesktop ? 'shift-circle' : 'shift-circle-mobile'
+		},
+	},
 	methods: {},
 	mounted() {
 		this.$nextTick(() => {})
@@ -27,4 +42,20 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.shift-circle {
+	top: -220%;
+	left: -161%;
+	height: 540%;
+	position: absolute;
+}
+.shift-circle-mobile {
+	top: -220%;
+	left: -115%;
+	height: 540%;
+	position: absolute;
+}
+.shift-text {
+	padding-left: 50px;
+}
+</style>
