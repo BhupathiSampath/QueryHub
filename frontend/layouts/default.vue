@@ -1,6 +1,6 @@
 <template>
 	<div class="font-family-averta">
-		<CommonNavBar />
+		<CommonNavBar :transparent="transparent" />
 		<Nuxt />
 		<CommonFooter />
 	</div>
@@ -8,9 +8,19 @@
 
 <script>
 export default {
-	data: () => ({}),
+	data: () => ({
+		transparent: true,
+	}),
 	components: {},
-	methods: {},
+	methods: {
+		handleScroll() {
+			if (window.scrollY > 20) {
+				this.transparent = false
+			} else {
+				this.transparent = true
+			}
+		},
+	},
 	mounted() {
 		this.$nextTick(async () => {
 			const loading = this.$vs.loading()
