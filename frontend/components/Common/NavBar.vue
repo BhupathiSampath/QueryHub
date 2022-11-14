@@ -1,12 +1,16 @@
 <template>
-	<b-navbar shadow fixed-top spaced>
+	<b-navbar fixed-top spaced :class="ClassNavbar">
 		<template #brand>
-			<b-navbar-item tag="router-link" :to="{ path: '/' }">
-				<span class="is-size-5 has-text-weight-bold">XPLORECoV2</span>
-			</b-navbar-item>
+			<div class="is-relative">
+				<DesignCircle :class="ClassCircle" />
+				<b-navbar-item tag="router-link" :to="{ path: '/' }">
+					<span :class="ClassText">XPLORECoV2</span>
+				</b-navbar-item>
+			</div>
 		</template>
 
 		<template #end>
+			<b-button rounded type="is-light" icon-left="theme-light-dark" />
 			<b-navbar-item tag="div">
 				<div class="buttons">
 					<a class="button is-light"> Log in </a>
