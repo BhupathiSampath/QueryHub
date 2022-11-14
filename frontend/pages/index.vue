@@ -173,7 +173,7 @@
 				</vs-table>
 			</div>
 		</section>
-		<DesignCircle />
+		<!-- <DesignCircle /> -->
 
 		<!-- 		<section class="section timeline-design" v-for="item in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" :key="item">
 			<div class="box">
