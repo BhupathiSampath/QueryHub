@@ -27,7 +27,6 @@ from queryhub.api.weekly_report.state_wise_last_threemonths import (
 
 from .graph.state_count import StateCountView
 from .graph.week_month_count import WeekMonthCountView
-
 from .autocomplete.states import StatesAutoCompleteView
 from .autocomplete.nextclade import CladeAutoCompleteView
 from .autocomplete.mutation import MutationAutoCompleteView
@@ -35,9 +34,11 @@ from .autocomplete.deletion import DeletionAutoCompleteView
 from .autocomplete.pangolineage import LineageAutoCompleteView
 from .autocomplete.nextcladepango import NextcladePangolinAutoCompleteView
 from .autocomplete.combined import CombinedAutoCompleteView
+from .frontend_stats import FrontendStatsView
 
 urlpatterns = [
     path("query/", GetDataView.as_view(), name="get_data"),
+    path("stats/", FrontendStatsView.as_view(), name="stats"),
     path("upload/", UploadNextstrainView.as_view(), name="upload"),
     path("lineages_count/", UniqeLineageCount.as_view(), name="lineages_count"),
     path(
