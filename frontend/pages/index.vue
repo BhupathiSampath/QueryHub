@@ -233,6 +233,12 @@ export default {
 		},
 	},
 	computed: {
+		ClassSection() {
+			return this.$device.isDesktop ? 'section timeline-design' : 'section timeline-design-mobile'
+		},
+		ClassCircle() {
+			return this.$device.isDesktop ? 'top-corner' : 'top-corner-mobile'
+		},
 		...mapFields([
 			'stats',
 			'table_data',
