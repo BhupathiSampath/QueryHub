@@ -31,6 +31,13 @@
 		<section :class="ClassSection">
 			<div class="box">
 				<FilterManager />
+				<div class="mt-2 has-text-weight-semibold">
+					<div class="pb-2">Example search</div>
+					<b-button type="is-info is-light">Example 1 </b-button>
+					<b-button type="is-info is-light">Example 2</b-button>
+					<b-button type="is-info is-light">Example 3</b-button>
+					<b-button type="is-info is-light">Example 4</b-button>
+				</div>
 			</div>
 		</section>
 
