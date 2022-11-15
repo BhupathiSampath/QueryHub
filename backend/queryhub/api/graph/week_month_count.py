@@ -2,7 +2,7 @@ from django.db.models import Count
 from queryhub.models import QueryHubModel
 from rest_framework.response import Response
 from queryhub.api.utils import create_uniform_response
-from queryhub.api.tasks import text_search, advenced_filter
+from queryhub.api.tasks import TextSearch, AdvancedFilter
 from rest_framework import generics, exceptions, serializers, status
 
 
@@ -24,8 +24,8 @@ class WeekMonthCountSerializer(serializers.Serializer):
         nextclade_pango = request.get("nextcladelineage")
         obj = QueryHubModel.objects
         if search:
-            obj = text_search(search, obj)
-        obj = advenced_filter(
+            obj = TextSearch(search, obj)
+        obj = AdvancedFilter(
             obj,
             days,
             date,
