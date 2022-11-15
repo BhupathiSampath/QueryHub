@@ -4,84 +4,55 @@ from django.db.models import Q
 from datetime import date, timedelta
 
 
-def text_search2(search, obj):
-    print("Search:", search)
+def TextSearch(search, obj):
     obj = obj.filter(
         Q(
             reduce(
-                operator.and_,
+                operator.or_,
                 (Q(lineage__icontains=x) for x in search),
             )
         )
         | Q(
             reduce(
-                operator.and_,
+                operator.or_,
                 (Q(division__icontains=x) for x in search),
             )
         )
         | Q(
             reduce(
-                operator.and_,
+                operator.or_,
                 (Q(clade__icontains=x) for x in search),
             )
         )
         | Q(
             reduce(
-                operator.and_,
+                operator.or_,
                 (Q(strain__icontains=x) for x in search),
             )
         )
         | Q(
             reduce(
-                operator.and_,
+                operator.or_,
                 (Q(aadeletions__icontains=x) for x in search),
             )
         )
         | Q(
             reduce(
-                operator.and_,
+                operator.or_,
                 (Q(nextclade_pango__icontains=x) for x in search),
             )
         )
         | Q(
             reduce(
-                operator.and_,
+                operator.or_,
                 (Q(aasubstitutions__icontains=x) for x in search),
             )
         )
-    )
+    ).distinct()
     return obj
 
 
-def text_search(search, obj):
-    obj = obj.filter(
-        Q(clade__in=search)
-        | Q(strain__in=search)
-        | Q(lineage__in=search)
-        | Q(division__in=search)
-        | Q(aadeletions__in=search)
-        | Q(nextclade_pango__in=search)
-        | Q(aasubstitutions__in=search)
-    )
-    return obj
-
-
-def text_search1(search, obj):
-    print("Search:", search)
-    obj = obj.filter(
-        Q(date__icontains=search[0])
-        | Q(lineage__icontains=search[0])
-        | Q(division__icontains=search[0])
-        | Q(strain__icontains=search[0])
-        | Q(nextclade_pango__icontains=search[0])
-        | Q(aasubstitutions__icontains=search[0])
-        | Q(aadeletions__icontains=search[0])
-        | Q(clade__icontains=search[0])
-    )
-    return obj
-
-
-def advenced_filter(
+def AdvancedFilter(
     obj,
     days,
     date,
