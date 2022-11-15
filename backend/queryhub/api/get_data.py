@@ -9,7 +9,7 @@ from datetime import date, timedelta
 from .utils import create_uniform_response
 from django.core.paginator import Paginator
 from rest_framework.response import Response
-from .tasks import text_search, advenced_filter
+from .tasks import TextSearch, AdvancedFilter
 from rest_framework import generics, exceptions, serializers, status
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -34,8 +34,8 @@ class GetDataSerializer(serializers.Serializer):
         total = obj.count()
 
         if search:
-            obj = text_search(search, obj)
-        obj = advenced_filter(
+            obj = TextSearch(search, obj)
+        obj = AdvancedFilter(
             obj,
             days,
             date,
