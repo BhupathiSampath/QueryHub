@@ -15,7 +15,6 @@
 						rounded
 						ellipsis
 						id="ignore"
-						maxtags="1"
 						type="is-info"
 						icon="magnify"
 						v-model="search"
