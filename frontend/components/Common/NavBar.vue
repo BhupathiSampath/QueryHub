@@ -10,11 +10,12 @@
 		</template>
 
 		<template #end>
-			<b-button rounded type="is-light" icon-left="theme-light-dark" />
 			<b-navbar-item tag="div">
-				<div class="buttons">
-					<a class="button is-light"> Log in </a>
-				</div>
+				<b-button type="is-light" expanded icon-left="theme-light-dark" />
+			</b-navbar-item>
+
+			<b-navbar-item tag="div">
+				<b-button type="is-light" expanded label="Log in" />
 			</b-navbar-item>
 		</template>
 	</b-navbar>
