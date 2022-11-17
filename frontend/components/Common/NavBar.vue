@@ -11,7 +11,7 @@
 
 		<template #end>
 			<b-navbar-item tag="div">
-				<b-button type="is-light" expanded icon-left="theme-light-dark" />
+				<b-button type="is-light" expanded icon-left="theme-light-dark" @click="ChangeColor" />
 			</b-navbar-item>
 
 			<b-navbar-item tag="div">
@@ -23,7 +23,9 @@
 
 <script>
 export default {
-	data: () => ({}),
+	data: () => ({
+		theme: 'light',
+	}),
 	props: {
 		transparent: { type: Boolean, required: true },
 	},
@@ -40,7 +42,36 @@ export default {
 			return this.$device.isDesktop ? 'shift-circle' : 'shift-circle-mobile'
 		},
 	},
-	methods: {},
+	methods: {
+		ChangeColor() {
+			// const hasSysDarkClass = document.body.classList.contains('systemDarkPreference')
+			// console.log(hasSysDarkClass)
+			// const a = window.matchMedia('(prefers-color-scheme: dark)')
+			// console.log((a.matches = false))
+			// const useDark = window.matchMedia('(prefers-color-scheme: dark)')
+			// function toggleDarkMode(state) {
+			// 	document.documentElement.classList.toggle('dark-mode', state)
+			// }
+			// toggleDarkMode(useDark.matches)
+			// console.log(document.documentElement.classList)
+			this.theme = this.theme == 'dark' ? 'light' : 'dark'
+			if (this.theme == 'dark') {
+				document.documentElement.classList.add('dark')
+			} else {
+				document.documentElement.classList.remove('dark')
+			}
+			// if (this.theme == 'dark') {
+			// } else {
+			// 	document.documentElement.classList.remove('dark')
+			// 	this.theme = 'light'
+			// }
+			// window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+			// 	const newColorScheme = event.matches ? 'dark' : 'light'
+			// 	// console.log()
+			// })
+			// localStorage.setItem('theme', payload)
+		},
+	},
 	mounted() {
 		this.$nextTick(() => {})
 	},
