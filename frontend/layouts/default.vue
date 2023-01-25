@@ -51,6 +51,7 @@ export default {
 			const loading = this.$vs.loading()
 			this.$store.dispatch('GetTable')
 			this.$store.dispatch('GetStateGraph')
+			this.$store.dispatch('GetSubstitutionGraph')
 			this.$store.dispatch('GetSequenceWeeklyGraph')
 			this.$store.dispatch('autocomplete/GetCladeNames')
 			this.$store.dispatch('autocomplete/GetStateNames')
