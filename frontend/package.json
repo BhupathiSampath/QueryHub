@@ -17,6 +17,7 @@
 		"biojs-io-fasta": "0.1.17",
 		"core-js": "3.15.1",
 		"echarts": "5.4.0",
+		"echarts-gl": "2.0.8",
 		"filepond": "4.30.4",
 		"fuzzyset": "1.0.7",
 		"lodash": "4.17.21",
