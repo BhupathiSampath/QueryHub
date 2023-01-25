@@ -3,57 +3,62 @@
 		<section class="section">
 			<div class="box is-clipped is-relative">
 				<DesignCircle :class="ClassCircle" />
-				<div class="title is-5 has-text-centered has-text-grey-light z-2">Data statistics</div>
-				<nav class="level">
-					<div class="level-item has-text-centered">
-						<div>
-							<p class="heading">Genomes Uploaded</p>
-							<p class="title">{{ stats.total }}</p>
-						</div>
+				<div class="columns is-vcentered">
+					<div class="column is-8">
+						<div class="title is-5 has-text-centered has-text-grey-light z-2">Data statistics</div>
+						<nav class="level pl-3">
+							<div class="level-item has-text-centered">
+								<div>
+									<p class="heading">Genomes Uploaded</p>
+									<p class="title">{{ stats.total }}</p>
+								</div>
+							</div>
+							<div class="level-item has-text-centered">
+								<div>
+									<p class="heading">Lineages Found</p>
+									<p class="title">{{ stats.lineages }}</p>
+								</div>
+							</div>
+							<div class="level-item has-text-centered">
+								<div>
+									<p class="heading">NextcladePango Found</p>
+									<p class="title">{{ stats.nextcladepango }}</p>
+								</div>
+							</div>
+							<div class="level-item has-text-centered">
+								<div>
+									<p class="heading">Clades Found</p>
+									<p class="title">{{ stats.clade }}</p>
+								</div>
+							</div>
+							<div class="level-item has-text-centered">
+								<div>
+									<p class="heading">States Covered</p>
+									<p class="title">{{ stats.state }}</p>
+								</div>
+							</div>
+							<div class="level-item has-text-centered">
+								<div>
+									<p class="heading">Filtered Set</p>
+									<p class="title">{{ stats.filtered }}</p>
+								</div>
+							</div>
+						</nav>
+						<hr class="ml-3" />
+						<div class="title is-5 has-text-centered has-text-grey-light">Tool versions</div>
+						<nav class="level pl-3">
+							<div class="level-item has-text-centered" v-for="(tool, value) in version" :key="tool">
+								<div>
+									<p class="heading">{{ value }}</p>
+									<p class="title is-size-4">{{ tool }}</p>
+								</div>
+							</div>
+						</nav>
 					</div>
-					<div class="level-item has-text-centered">
-						<div>
-							<p class="heading">Lineages Found</p>
-							<p class="title">{{ stats.lineages }}</p>
-						</div>
+					<div class="column is-4">
+						<GraphStackedBar :chartdata="stacked_bar_chart" />
 					</div>
-					<div class="level-item has-text-centered">
-						<div>
-							<p class="heading">NextcladePango Found</p>
-							<p class="title">{{ stats.nextcladepango }}</p>
-						</div>
-					</div>
-					<div class="level-item has-text-centered">
-						<div>
-							<p class="heading">Clades Found</p>
-							<p class="title">{{ stats.clade }}</p>
-						</div>
-					</div>
-					<div class="level-item has-text-centered">
-						<div>
-							<p class="heading">States Covered</p>
-							<p class="title">{{ stats.state }}</p>
-						</div>
-					</div>
-					<div class="level-item has-text-centered">
-						<div>
-							<p class="heading">Filtered Set</p>
-							<p class="title">{{ stats.filtered }}</p>
-						</div>
-					</div>
-				</nav>
-				<hr />
-				<div class="title is-5 has-text-centered has-text-grey-light">Tool versions</div>
-				<nav class="level">
-					<div class="level-item has-text-centered" v-for="(tool, value) in version" :key="tool">
-						<div>
-							<p class="heading">{{ value }}</p>
-							<p class="title">{{ tool }}</p>
-						</div>
-					</div>
-				</nav>
-
-				<!-- <GraphDBar :chartdata="state" header="Top 5 lineages and their 6 month distribution" /> -->
+				</div>
 			</div>
 		</section>
 
@@ -191,7 +196,13 @@
 
 		<section :class="ClassSection">
 			<div class="box">
-				<GraphPie />
+				<GraphPie :chartdata="substitution" v-if="substitution_loaded" />
+			</div>
+		</section>
+
+		<section :class="ClassSection">
+			<div class="box">
+				<GraphBox />
 			</div>
 		</section>
 
@@ -317,7 +328,10 @@ export default {
 			'filters.mode',
 			'graphs.state',
 			'graphs.seq_week',
+			'stacked_bar_chart',
+			'graphs.substitution',
 			'graphs.state_graph_loaded',
+			'graphs.substitution_loaded',
 			'graphs.seq_week_graph_loaded',
 		]),
 		RenamedStateLabel() {
