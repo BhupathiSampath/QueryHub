@@ -13,11 +13,11 @@
 </template>
 
 <script>
+import { map } from 'lodash'
 import { use } from 'echarts/core'
-import { PieChart, LineChart, ScatterChart } from 'echarts/charts'
-// import { mapFields } from 'vuex-map-fields'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import { CanvasRenderer } from 'echarts/renderers'
+import { PieChart, LineChart, ScatterChart } from 'echarts/charts'
 import { PolarComponent, LegendComponent, TooltipComponent } from 'echarts/components'
 
 use([PieChart, LineChart, CanvasRenderer, LegendComponent, TooltipComponent, PolarComponent, ScatterChart])
@@ -111,19 +111,6 @@ export default {
 					{ name: "3'UTR" },
 				],
 			},
-			xAxis: {
-				show: false,
-				min: -10,
-				max: 10,
-				gridIndex: 0,
-			},
-
-			yAxis: {
-				show: false,
-				min: -10,
-				max: 10,
-				gridIndex: 0,
-			},
 			angleAxis: {
 				show: false,
 				type: 'value',
@@ -206,42 +193,7 @@ export default {
 					symbol: 'none',
 					// symbolSize: 10,
 					coordinateSystem: 'polar',
-					// data: [
-					// 	[0, 0],
-					// 	[0, 10, 'Mutation1x1'],
-					// 	[0, 0],
-					// 	[0, -10, 'Mutation1x2'],
-					// 	[0, 0],
-					// 	[10, 0, 'Mutation1y1'],
-					// 	[0, 0],
-					// 	[-10, 0, 'Mutation1y2'],
-					// 	[0, 0],
-					// 	[7.2, 7.2, 'Mutation2'],
-					// 	[0, 0],
-					// 	[10, 7, 'Mutation3'],
-					// 	[0, 0],
-					// 	[10, 8, 'Mutation4'],
-					// 	[0, 0],
-					// 	[-5, 10, 'Mutation5'],
-					// ],
-					data: [
-						[0, 0],
-						[100, 1000, 'Mutation1x1'],
-						[0, 0],
-						[100, 2000, 'Mutation1x2'],
-						[0, 0],
-						[100, 3000, 'Mutation1y1'],
-						[0, 0],
-						[100, 4000, 'Mutation1y2'],
-						[0, 0],
-						[100, 5000, 'Mutation2'],
-						[0, 0],
-						[100, 6000, 'Mutation3'],
-						[0, 0],
-						[100, 8000, 'Mutation4'],
-						[0, 0],
-						[100, 10000, 'Mutation5'],
-					],
+					data: [],
 					label: {
 						// show: true,
 						fontSize: 12,
@@ -274,19 +226,19 @@ export default {
 					symbol: 'circle',
 					itemStyle: {
 						opacity: 1,
-						color: '#efe111',
+						color: '#c23531',
 					},
-					symbolSize: 15,
+					// symbolSize: 15,
 					data: [
-						[100, 1000],
-						[100, 1050],
-						[100, 2000],
-						[100, 3000],
-						[100, 4000],
-						[100, 5000],
-						[100, 6000],
-						[100, 8000],
-						[100, 10000],
+						// [100, 1000],
+						// [100, 1050],
+						// [100, 2000],
+						// [100, 3000],
+						// [100, 4000],
+						// [100, 5000],
+						// [100, 6000],
+						// [100, 8000],
+						// [100, 10000],
 					],
 				},
 
@@ -423,23 +375,17 @@ export default {
 	provide: {
 		[THEME_KEY]: 'light',
 	},
-	props: {},
-	watch: {},
-	computed: {
-		// ...mapFields(['landing_info', 'landing_info_loaded']),
+	props: {
+		chartdata: { type: Object, required: true },
+	},
+	watch: {
+		chartdata(value) {
+			this.SetChart()
+		},
 	},
 	methods: {
-		async get_chartdata() {
-			// if (this.landing_info_loaded) {
-			// this.options.series[0].data = [
-			// 	// { name: '', value: 2000 },
-			// 	{ name: "5'UTR", value: 50 },
-			// 	{ name: 'ORF1a', value: 50 },
-			// 	{ name: 'ORF1b', value: 50 },
-			// 	{ name: 'Spike', value: 50 },
-			// ]
+		SetChart() {
 			this.options.series[0].data = [
-				// { name: '', value: 2000 },
 				{ name: "5'UTR", value: 266 },
 				{ name: 'ORF1a', value: 13202 },
 				{ name: 'ORF1b', value: 8087 },
@@ -456,21 +402,25 @@ export default {
 				{ name: "3'UTR", value: 228 },
 			]
 			this.options.series[1].data = [{ name: 'Donot show', value: 266 }]
-			// this.options.series[0].label.formatter = `Total: ${this.landing_info.genomes_sequenced.toLocaleString(
-			// 	'en-IN',
-			// )}`
+			this.options.series[2].data = this.chartdata.line
+			this.options.series[3].data = map(this.chartdata.scatter, (d) => {
+				return {
+					value: d,
+					symbolSize: d[0] <= 68 ? 0 : 15,
+					opacity: d[0] / 100,
+				}
+			})
 			if (this.$device.isMobileOrTablet) {
 				this.options.series[0].top = '0%'
 				this.options.series[0].radius = ['20%', '100%']
 			}
-			// }
 			this.chart_loader = false
 		},
 	},
 	beforeMount() {},
 	mounted() {
 		this.$nextTick(() => {
-			this.get_chartdata()
+			this.SetChart()
 		})
 	},
 }
