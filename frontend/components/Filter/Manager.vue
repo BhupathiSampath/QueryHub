@@ -91,6 +91,14 @@
 				<b-button type="is-dark" icon-left="check-outline" label="Apply filter" @click="Search" />
 			</div>
 		</div>
+
+		<div class="mt-2 has-text-weight-semibold">
+			<div class="pb-2">Example search</div>
+			<b-button type="is-info is-light" @click="RunExample(1)">Example 1 </b-button>
+			<b-button type="is-info is-light" @click="RunExample(2)">Example 2</b-button>
+			<b-button type="is-info is-light" @click="RunExample(3)">Example 3</b-button>
+			<b-button type="is-info is-light" @click="RunExample(4)">Example 4</b-button>
+		</div>
 	</div>
 </template>
 
@@ -101,6 +109,7 @@ export default {
 	data: () => ({
 		general_query: '',
 		activate_filter: false,
+		// clade_index: Date.now() + Math.floor(Math.random() * 10000 + 1),
 	}),
 	computed: {
 		...mapFields('autocomplete', [
@@ -132,6 +141,12 @@ export default {
 			await this.$store.dispatch('GetStateGraph')
 			await this.$store.dispatch('GetSequenceWeeklyGraph')
 			loading.close()
+		},
+		RunExample(example_type) {
+			this.activate_filter = this.activate_filter ? this.activate_filter : true
+			this.clade = ['21A (Delta)']
+			// this.clade_index = Date.now() + Math.floor(Math.random() * 10000 + 1)
+			console.log(example_type)
 		},
 	},
 	mounted() {
