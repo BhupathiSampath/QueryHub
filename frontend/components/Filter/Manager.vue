@@ -89,6 +89,7 @@
 			</div> -->
 			<div class="column has-text-centered mt-4">
 				<b-button type="is-dark" icon-left="check-outline" label="Apply filter" @click="Search" />
+				<b-button type="is-dark" icon-left="filter-remove-outline" label="Clear filter" @click="Clear" />
 			</div>
 		</div>
 
@@ -109,7 +110,6 @@ export default {
 	data: () => ({
 		general_query: '',
 		activate_filter: false,
-		// clade_index: Date.now() + Math.floor(Math.random() * 10000 + 1),
 	}),
 	computed: {
 		...mapFields('autocomplete', [
