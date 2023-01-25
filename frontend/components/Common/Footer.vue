@@ -1,10 +1,16 @@
 <template>
-	<b-navbar :mobile-burger="false" centered class="footer has-background-grey-lighter" shadow>
+	<b-navbar :mobile-burger="false" centered class="footer pb-6" shadow type="is-light">
 		<template #start>
 			<footer>
-				<div class="content has-text-centered">
-					<p>Magna cupidatat sit labore dolore occaecat id in esse eu ad reprehenderit quis dolor.</p>
-				</div>
+				<p align="center">
+					© 2023 All Rights Reserved<br />
+					INSACOG DataHub is developed & maintained by NSM group National Institute of Biomedical
+					Genomics (NIBMG), Kalyani <br />
+					Source Code is available at
+					<a href="https://github.com/animesh-workplace/QueryHub">
+						https://github.com/animesh-workplace/QueryHub
+					</a>
+				</p>
 			</footer>
 		</template>
 	</b-navbar>
