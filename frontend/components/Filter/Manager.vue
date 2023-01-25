@@ -139,14 +139,42 @@ export default {
 			const loading = this.$vs.loading()
 			await this.$store.dispatch('UpdateTable')
 			await this.$store.dispatch('GetStateGraph')
+			await this.$store.dispatch('GetSubstitutionGraph')
 			await this.$store.dispatch('GetSequenceWeeklyGraph')
 			loading.close()
 		},
+		Clear() {
+			this.clade = []
+			this.state = []
+			this.dates = []
+			this.deletion = []
+			this.pangolineage = []
+			this.substitution = []
+			this.nextcladelineage = []
+		},
 		RunExample(example_type) {
 			this.activate_filter = this.activate_filter ? this.activate_filter : true
-			this.clade = ['21A (Delta)']
-			// this.clade_index = Date.now() + Math.floor(Math.random() * 10000 + 1)
-			console.log(example_type)
+			switch (example_type) {
+				case 1:
+					this.clade = ['21A (Delta)']
+					break
+				case 2:
+					this.clade = ['22B (Omicron)']
+					this.pangolineage = ['BF.1', 'BF.2', 'BF.3', 'BF.4', 'BF.5']
+					break
+				case 3:
+					this.clade = ['22B (Omicron)']
+					this.nextcladelineage = ['BF.1', 'BF.2']
+					this.pangolineage = ['BF.1', 'BF.2', 'BF.3', 'BF.4', 'BF.5']
+					break
+				case 4:
+					this.pangolineage = ['BF.7']
+					this.clade = ['22B (Omicron)']
+					this.nextcladelineage = ['BF.7']
+					this.substitution = ['ORF1a:L3027F', 'ORF1a:T3090I', 'ORF1a:T3255I']
+					break
+				default:
+			}
 		},
 	},
 	mounted() {
