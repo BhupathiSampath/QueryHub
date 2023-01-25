@@ -143,5 +143,5 @@ def weekly_report_stacked(QuerySet):
         yu = [[round((100 * x / y), 2) for x, y in zip(lst, c)] for lst in b]
         for i in yu:
             j["value1"] = i
-    req_list = sorted(req_list, key=lambda d: d["who_label"])
+    # req_list = sorted(req_list, key=lambda d: d["who_label"])
     return {res[0]: mnd, res[1]: req_list}
