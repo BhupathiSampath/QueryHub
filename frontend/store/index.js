@@ -20,9 +20,17 @@ export const state = () => ({
 	graphs: {
 		state: [],
 		seq_week: [],
+		substitution: [],
 		state_graph_loaded: false,
+		substitution_loaded: false,
 		seq_week_graph_loaded: false,
 	},
+	stacked_bar_chart: [
+		{ name: 'Omicron', value: [96.21, 97.1, 96.26, 93.18, 91.21] },
+		{ name: 'Delta', value: [0.07, 0.04, 0.0, 0.12, 0.0] },
+		{ name: 'Unassigned', value: [0.91, 0.66, 1.59, 2.89, 5.49] },
+		{ name: 'Recombinant', value: [2.81, 2.21, 2.15, 3.82, 3.3] },
+	],
 })
 
 export const getters = {
@@ -47,6 +55,10 @@ export const mutations = {
 	SET_GRAPH_SEQ_WEEK(state, payload) {
 		state.graphs.seq_week = payload
 		state.graphs.seq_week_graph_loaded = true
+	},
+	SET_GRAPH_SUBSTITUTION(state, payload) {
+		state.graphs.substitution = payload
+		state.graphs.substitution_loaded = true
 	},
 }
 
@@ -108,6 +120,18 @@ export const actions = {
 		try {
 			const response = await this.$axios.$post('/graph/sequence-count/', state.filters)
 			await commit('SET_GRAPH_SEQ_WEEK', response)
+		} catch (err) {
+			Toast.open({
+				message: 'err',
+				type: 'is-danger',
+				position: 'is-top-right',
+			})
+		}
+	},
+	async GetSubstitutionGraph({ commit, dispatch, state }) {
+		try {
+			const response = await this.$axios.$post('/graph/substitution-count/', state.filters)
+			await commit('SET_GRAPH_SUBSTITUTION', response)
 		} catch (err) {
 			Toast.open({
 				message: 'err',
