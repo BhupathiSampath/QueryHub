@@ -98,7 +98,7 @@
 			</div>
 		</section>
 
-		<section :class="ClassSection">
+		<!-- 		<section :class="ClassSection">
 			<div class="box">
 				<div class="title is-5 has-text-centered has-text-grey-light">Data statistics</div>
 				<nav class="level">
@@ -150,7 +150,7 @@
 					</div>
 				</nav>
 			</div>
-		</section>
+		</section> -->
 
 		<section :class="ClassSection">
 			<div class="box">
