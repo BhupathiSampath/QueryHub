@@ -40,6 +40,9 @@ export default {
 		options(value) {
 			this.state = value
 		},
+		value(value) {
+			this.tags = value
+		},
 	},
 	methods: {
 		Filtering(text) {
