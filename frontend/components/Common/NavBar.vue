@@ -10,13 +10,13 @@
 		</template>
 
 		<template #end>
-			<b-navbar-item tag="div">
+			<!-- 			<b-navbar-item tag="div">
 				<b-button type="is-light" expanded icon-left="theme-light-dark" @click="ChangeColor" />
 			</b-navbar-item>
 
 			<b-navbar-item tag="div">
 				<b-button type="is-light" expanded label="Log in" />
-			</b-navbar-item>
+			</b-navbar-item> -->
 		</template>
 	</b-navbar>
 </template>
