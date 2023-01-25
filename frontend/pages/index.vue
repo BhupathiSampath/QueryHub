@@ -1,12 +1,69 @@
 <template>
 	<div class="bg-design">
 		<section class="section">
+			<div class="box is-clipped is-relative">
+				<DesignCircle :class="ClassCircle" />
+				<div class="title is-5 has-text-centered has-text-grey-light z-2">Data statistics</div>
+				<nav class="level">
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Genomes Uploaded</p>
+							<p class="title">{{ stats.total }}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Lineages Found</p>
+							<p class="title">{{ stats.lineages }}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">NextcladePango Found</p>
+							<p class="title">{{ stats.nextcladepango }}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Clades Found</p>
+							<p class="title">{{ stats.clade }}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">States Covered</p>
+							<p class="title">{{ stats.state }}</p>
+						</div>
+					</div>
+					<div class="level-item has-text-centered">
+						<div>
+							<p class="heading">Filtered Set</p>
+							<p class="title">{{ stats.filtered }}</p>
+						</div>
+					</div>
+				</nav>
+				<hr />
+				<div class="title is-5 has-text-centered has-text-grey-light">Tool versions</div>
+				<nav class="level">
+					<div class="level-item has-text-centered" v-for="(tool, value) in version" :key="tool">
+						<div>
+							<p class="heading">{{ value }}</p>
+							<p class="title">{{ tool }}</p>
+						</div>
+					</div>
+				</nav>
+
+				<!-- <GraphDBar :chartdata="state" header="Top 5 lineages and their 6 month distribution" /> -->
+			</div>
+		</section>
+
+		<!-- 		<section class="section">
 			<div class="box box-size is-clipped is-relative">
 				<DesignCircle :class="ClassCircle" />
 				<div class="column is-offset-2 is-10 has-text-justified">
-					<!-- 					<span class="is-size-5 has-text-weight-bold has-background-white mt-1 is-block"
+										<span class="is-size-5 has-text-weight-bold has-background-white mt-1 is-block"
 						>XPLORECoV2</span
-					> -->
+					>
 					Sunt duis fugiat velit dolore velit id laboris aliqua enim dolor enim qui fugiat et dolor ex
 					cupidatat anim commodo eu sed dolore sed ut do qui velit reprehenderit pariatur et mollit in
 					laborum do irure ut veniam nostrud voluptate elit in veniam officia cillum sunt mollit esse
@@ -26,18 +83,18 @@
 					amet laborum veniam reprehenderit tempor eu in velit enim.
 				</div>
 			</div>
-		</section>
+		</section> -->
 
 		<section :class="ClassSection">
 			<div class="box">
 				<FilterManager />
-				<div class="mt-2 has-text-weight-semibold">
+				<!-- 				<div class="mt-2 has-text-weight-semibold">
 					<div class="pb-2">Example search</div>
 					<b-button type="is-info is-light">Example 1 </b-button>
 					<b-button type="is-info is-light">Example 2</b-button>
 					<b-button type="is-info is-light">Example 3</b-button>
 					<b-button type="is-info is-light">Example 4</b-button>
-				</div>
+				</div> -->
 			</div>
 		</section>
 
@@ -129,6 +186,12 @@
 						<GraphMap :chartdata="RenamedStateLabel" />
 					</div>
 				</div> -->
+			</div>
+		</section>
+
+		<section :class="ClassSection">
+			<div class="box">
+				<GraphPie />
 			</div>
 		</section>
 
@@ -244,7 +307,7 @@ export default {
 			return this.$device.isDesktop ? 'section timeline-design' : 'section timeline-design-mobile'
 		},
 		ClassCircle() {
-			return this.$device.isDesktop ? 'top-corner' : 'top-corner-mobile'
+			return this.$device.isDesktop ? 'top-corner-mobile' : 'top-corner-mobile'
 		},
 		...mapFields([
 			'stats',
@@ -363,6 +426,8 @@ export default {
 	width: 20%;
 	z-index: 0;
 	position: absolute;
+	opacity: 0.4;
+	z-index: 1;
 }
 .top-corner-mobile {
 	top: -50%;
