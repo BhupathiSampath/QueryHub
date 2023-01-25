@@ -29,6 +29,8 @@ from .upload import UploadNextstrainView
 from .frontend_stats import FrontendStatsView
 from .graph.state_count import StateCountView
 from .graph.week_month_count import WeekMonthCountView
+from .graph.substitution_count import SubstitutionCountView
+
 from .autocomplete.states import StatesAutoCompleteView
 from .autocomplete.nextclade import CladeAutoCompleteView
 from .autocomplete.mutation import MutationAutoCompleteView
@@ -36,6 +38,9 @@ from .autocomplete.deletion import DeletionAutoCompleteView
 from .autocomplete.combined import CombinedAutoCompleteView
 from .autocomplete.pangolineage import LineageAutoCompleteView
 from .autocomplete.nextcladepango import NextcladePangolinAutoCompleteView
+
+from .weekly_report.last_fourmonths_sequences import LastFourMonthsView
+from .weekly_report.last_fourmonths_variants import LastFourMonthsVariantView
 
 urlpatterns = [
     path("query/", GetDataView.as_view(), name="get_data"),
@@ -54,6 +59,28 @@ urlpatterns = [
                     "sequence-count/",
                     WeekMonthCountView.as_view(),
                     name="week_or_month_wise_count",
+                ),
+                path(
+                    "substitution-count/",
+                    SubstitutionCountView.as_view(),
+                    name="substitution_count",
+                ),
+            ]
+        ),
+    ),
+    path(
+        "report/",
+        include(
+            [
+                path(
+                    "four-month-sequence/",
+                    StateCountView.as_view(),
+                    name="four_month_state_count",
+                ),
+                path(
+                    "four-month-variants/",
+                    LastFourMonthsVariantView.as_view(),
+                    name="four_month_variant_count",
                 ),
             ]
         ),
