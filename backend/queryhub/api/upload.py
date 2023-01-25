@@ -43,6 +43,7 @@ class UploadSerializer(serializers.Serializer):
             inplace=True,
         )
         df.loc[df.collection_week == "W52-2022", "collection_week"] = "W01-2022"
+        df.loc[df.collection_week == "W52-2023", "collection_week"] = "W01-2023"
         engine = create_engine("sqlite:///database/db.sqlite3")
 
         QueryHubModel(
