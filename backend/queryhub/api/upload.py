@@ -22,7 +22,7 @@ class UploadSerializer(serializers.Serializer):
         df.rename(
             columns={
                 "url": "urls",
-                "WHO_label": "who_label",
+                "clade_who": "who_label",
                 "nonACGTNs": "non_ACGTNs",
                 "region_type": "region_type",
                 "aaDeletions": "aadeletions",
