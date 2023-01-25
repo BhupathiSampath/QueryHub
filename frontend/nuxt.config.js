@@ -15,8 +15,8 @@ export default {
 			{ name: 'format-detection', content: 'telephone=no' },
 			{ hid: 'description', name: 'description', content: '' },
 		],
-		link: [{ rel: 'icon', type: 'image/x-icon', href: `${process.env.ROUTER_BASE}favicon.ico` }],
 		style: [{ id: 'scheme', content: ':root{color-scheme:light}' }],
+		link: [{ rel: 'icon', type: 'image/x-icon', href: `${process.env.ROUTER_BASE}favicon.ico` }],
 	},
 	device: { refreshOnResize: true },
 	plugins: ['@/plugins/plugin-vuesax'],
@@ -25,7 +25,7 @@ export default {
 	router: { base: process.env.ROUTER_BASE },
 	css: ['vuesax/dist/vuesax.css', 'static/css/styles.css'],
 	build: {
-		transpile: [/echarts/, /zrender/],
+		transpile: [/echarts/, /zrender/, /echarts-gl/, /claygl/],
 		babel: {
 			plugins: [
 				['@babel/plugin-proposal-optional-chaining', { loose: true }],
