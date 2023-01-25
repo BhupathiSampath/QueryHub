@@ -1,5 +1,5 @@
 <template>
-	<b-navbar :mobile-burger="false" centered class="footer pb-6" shadow type="is-light">
+	<b-navbar :mobile-burger="false" centered active class="footer pb-6" shadow type="is-light">
 		<template #start>
 			<footer>
 				<p align="center">
