@@ -43,6 +43,9 @@ export default {
 		options(value) {
 			this.SettingUpFS()
 		},
+		value(value) {
+			this.tags = value
+		},
 	},
 	methods: {
 		Filtering(text) {
