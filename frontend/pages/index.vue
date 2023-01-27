@@ -200,11 +200,11 @@
 			</div>
 		</section>
 
-		<section :class="ClassSection">
+<!-- 		<section :class="ClassSection">
 			<div class="box">
 				<GraphBox />
 			</div>
-		</section>
+		</section> -->
 
 		<section :class="ClassSection">
 			<div class="box">
