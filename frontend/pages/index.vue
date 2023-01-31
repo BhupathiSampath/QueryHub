@@ -200,7 +200,7 @@
 			</div>
 		</section>
 
-<!-- 		<section :class="ClassSection">
+		<!-- 		<section :class="ClassSection">
 			<div class="box">
 				<GraphBox />
 			</div>
@@ -296,7 +296,7 @@ export default {
 			gofasta: '0.0.5',
 			minimap2: '2.24-r1122',
 			faToVcf: '426',
-			nextclade: '2.10.1',
+			nextclade: '2.11.0',
 		},
 	}),
 	watch: {
