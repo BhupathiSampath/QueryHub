@@ -289,14 +289,14 @@ export default {
 		map_bar_switcher: 'Bar',
 		version: {
 			pangolin: '4.2',
-			'pangolin-data': '1.18',
+			'pangolin-data': '1.19',
 			constellations: 'v0.1.10',
 			scorpio: '0.3.17',
-			usher: '0.6.0',
+			usher: '0.6.2',
 			gofasta: '0.0.5',
 			minimap2: '2.24-r1122',
 			faToVcf: '426',
-			nextclade: '2.11.0',
+			nextclade: '2.13.1',
 		},
 	}),
 	watch: {
