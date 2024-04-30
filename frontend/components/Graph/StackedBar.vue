@@ -143,7 +143,7 @@ export default {
 			}))
 			this.options.series = s
 			this.options.legend.data = only_name
-			this.options.xAxis.data = ['Dec-2022', 'Jan-2023', 'Feb-2023', 'Mar-2023', 'Apr-2023']
+			this.options.xAxis.data = ['Nov-2023', 'Dec-2023', 'Jan-2024', 'Feb-2024', 'Mar-2024']
 			if (this.$device.isMobileOrTablet) {
 				this.options.grid.y = '30%'
 			}
